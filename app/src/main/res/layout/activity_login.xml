@@ -14,17 +14,17 @@
         android:layout_height="50dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/button_bg"
-        android:text="@string/fingure_print"
+        android:text="Scan Fingure"
         app:icon="@android:drawable/btn_radio"
-    app:iconGravity="textStart"
-    app:iconSize="24dp"
-    app:iconTint="@color/white"
+        app:iconGravity="textStart"
+        app:iconSize="24dp"
+        app:iconTint="@color/white"
         android:clickable="true"
         android:focusable="true"
         android:onClick="testPage"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <com.google.android.material.button.MaterialButton
@@ -34,15 +34,15 @@
         android:layout_marginBottom="8dp"
         android:onClick="showLogin"
         android:background="@drawable/button_bg"
-        android:text="@string/login_text"
+        android:text="Login"
         app:icon="@android:drawable/btn_radio"
         app:iconGravity="textStart"
-    app:iconSize="24dp"
-    app:iconTint="@color/white"
-    app:layout_constraintBottom_toTopOf="@id/finger_scan"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.55"
-    app:layout_constraintStart_toStartOf="parent" />
+        app:iconSize="24dp"
+        app:iconTint="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/finger_scan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.55"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="68dp"
-        android:text="@string/login_to_continue"
+        android:text="Login to Continue"
         android:textColor="#800000"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -120,7 +120,7 @@
         android:clickable="true"
         android:focusable="true"
         android:onClick="onForgotPasswordClicked"
-        android:text="@string/forgot_password"
+        android:text="Forgot Password"
         android:textColor="#800000"
         android:textSize="15dp"
         app:layout_constraintBottom_toTopOf="@id/login"
