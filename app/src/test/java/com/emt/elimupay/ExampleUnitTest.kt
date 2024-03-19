@@ -1,4 +1,4 @@
-package com.example.test
+package com.emt.elimupay
 
 import org.junit.Test
 

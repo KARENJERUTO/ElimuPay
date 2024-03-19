@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">ElimuPay</string>
-    <string name="hello_login">Hello Login</string>
-    <string name="login_text">Login</string>
-    <string name="fingure_print">Finger Print</string>
-    <string name="login_to_continue">Login to continue</string>
+    <string name="title_home">ElimuPay</string>
+    <string name="title_dashboard">My Students</string>
 </resources>

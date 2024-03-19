@@ -1,6 +1,8 @@
-package com.example.test
+package com.emt.elimupay
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -16,5 +18,16 @@ class Login : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+
+    }
+
+    fun showLogin(view: View) {
+        val intent = Intent(this, com.emt.elimupay.MainActivity::class.java)
+        startActivity(intent)
+    }
+    fun onForgotPasswordClicked(view: View) {
+        val intent = Intent(this, com.emt.elimupay.ResetPassword::class.java)
+        startActivity(intent)
     }
 }
