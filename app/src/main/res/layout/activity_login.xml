@@ -15,7 +15,6 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/button_bg"
         android:text="Scan Fingure"
-        app:icon="@android:drawable/btn_radio"
         app:iconGravity="textStart"
         app:iconSize="24dp"
         app:iconTint="@color/white"
@@ -35,7 +34,6 @@
         android:onClick="showLogin"
         android:background="@drawable/button_bg"
         android:text="Login"
-        app:icon="@android:drawable/btn_radio"
         app:iconGravity="textStart"
         app:iconSize="24dp"
         app:iconTint="@color/white"
@@ -78,7 +76,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:hint="Username"
-        app:startIconDrawable="@android:drawable/ic_lock_lock">
+        app:startIconDrawable="@drawable/baseline_account_circle_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/username"
