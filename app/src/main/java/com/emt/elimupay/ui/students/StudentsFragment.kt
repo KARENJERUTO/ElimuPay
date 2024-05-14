@@ -28,7 +28,7 @@ class StudentsFragment : Fragment() {
         _binding = FragmentStudentsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
+        val textView: TextView = binding.etPaidFees
         dashboardViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }

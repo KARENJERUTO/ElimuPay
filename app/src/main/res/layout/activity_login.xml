@@ -6,7 +6,7 @@
     android:padding="20dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login">
+    android:name=".login">
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/finger_scan"
@@ -14,7 +14,7 @@
         android:layout_height="50dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/button_bg"
-        android:text="Scan Fingure"
+        android:text="Scan Finger"
         app:iconGravity="textStart"
         app:iconSize="24dp"
         app:iconTint="@color/white"
@@ -23,7 +23,8 @@
         android:onClick="testPage"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText" />
 
 
     <com.google.android.material.button.MaterialButton
@@ -75,7 +76,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:hint="Username"
+        android:text="Username"
         app:startIconDrawable="@drawable/baseline_account_circle_24">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -86,7 +87,7 @@
             android:inputType="text"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            />
+            tools:ignore="SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -97,7 +98,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:hint="Password"
+        android:text="Password"
         app:startIconDrawable="@android:drawable/ic_lock_lock">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -107,27 +108,29 @@
             android:ems="10"
             android:inputType="textPassword"
             android:paddingStart="8dp"
-            android:paddingEnd="8dp"/>
+            android:paddingEnd="8dp"
+            tools:ignore="SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/forgotPasswordTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="88dp"
+
+        android:layout_marginTop="10dp"
         android:clickable="true"
         android:focusable="true"
+        android:minHeight="48dp"
         android:onClick="onForgotPasswordClicked"
         android:text="Forgot Password"
         android:textColor="#800000"
-        android:textSize="15dp"
+        android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@id/login"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.437"
+        app:layout_constraintHorizontal_bias="0.948"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordInputLayout"
-        app:layout_constraintVertical_bias="0.492"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

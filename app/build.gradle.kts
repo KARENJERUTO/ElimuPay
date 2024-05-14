@@ -36,6 +36,7 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    
 }
 
 dependencies {
@@ -48,10 +49,17 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.activity)
+    implementation(libs.androidx.recyclerview)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
     implementation("com.google.android.material:material:1.5.0")
+    //noinspection GradleDependency
+
 //    implementation ("androidx.legacy:legacy-support-v4:1.0.0")
 //    implementation ("androidx.navigation:navigation-fragment-ktx:2.4.1")
 //    implementation ("androidx.navigation:navigation-ui-ktx:2.4.1")

@@ -11,66 +11,97 @@
     <!-- CardView with three icons in a row -->
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Good Morning, Jane"
-        android:textSize="30dp"
+        android:text="Good Morning,"
+        android:textSize="20dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/cardView2"
-        app:layout_constraintEnd_toEndOf="@+id/cardView2"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/cardView2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.634" />
+        app:layout_constraintStart_toStartOf="@+id/cardview1"
+        app:layout_constraintEnd_toEndOf="@+id/cardview1"
+        app:layout_constraintTop_toTopOf="@+id/cardview1"
+        app:layout_constraintBottom_toTopOf="@+id/textViewDashboard" />
+
+    <TextView
+        android:id="@+id/textViewDashboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dashboard"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/textView1"
+        app:layout_constraintStart_toStartOf="@+id/cardview1"
+        app:layout_constraintEnd_toEndOf="@+id/cardview1" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:id="@+id/cardview1"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_margin="16dp"
         app:cardCornerRadius="8dp"
-        app:cardElevation="1dp"
+        app:cardElevation="2dp"
+        android:backgroundTint="#CCCCCC"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="81dp"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintTop_toBottomOf="@id/textViewDashboard">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:padding="16dp">
 
-            <ImageView
-                android:id="@+id/iconPay"
-                android:layout_width="0dp"
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="16dp"
-                android:src="@drawable/account" />
+                android:text="Balance"
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/iconStatements"
-                android:layout_width="0dp"
+            <TextView
+                android:id="@+id/textViewBalance"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="16dp"
-                android:src="@drawable/account" />
+                android:layout_below="@id/textView2"
+                android:layout_marginTop="8dp"
+                android:text="sh 2,000"
+                android:textSize="16sp" />
 
-            <ImageView
-                android:id="@+id/iconMoney"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="16dp"
-                android:src="@drawable/account" />
-        </LinearLayout>
-
+        </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview2"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_margin="16dp"
+        android:padding="8dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        android:backgroundTint="#CCCCCC"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardview1">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/feeStatement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fee Statement"
+                android:drawableLeft="@drawable/feestatements"
+                android:drawablePadding="8dp"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview3"
@@ -79,86 +110,34 @@
         android:layout_margin="16dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="2dp"
+        app:cardUseCompatPadding="true"
+        android:backgroundTint="#CCCCCC"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:clickable="true"
-        android:onClick="onCardViewClick"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2">
+        app:layout_constraintTop_toBottomOf="@+id/cardview2">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="200dp"
-                android:layout_height="35dp"
-                android:text="Pay Fee"
-                android:textSize="25dp"
-                android:textStyle="bold"
-                tools:layout_editor_absoluteX="19dp"
-                tools:layout_editor_absoluteY="20dp"
-                tools:ignore="MissingConstraints" />
+            <Button
+                android:id="@+id/button5"
+                android:layout_width="280dp"
+                android:layout_height="72dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="onPayFeesClicked"
+                android:text="Pay Fees"
+                android:textSize="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardview4"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardview3">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="200dp"
-                android:layout_height="35dp"
-                android:text="Fee Balance"
-                android:textSize="25dp"
-                android:textStyle="bold"
-                tools:layout_editor_absoluteX="19dp"
-                tools:layout_editor_absoluteY="20dp"
-                tools:ignore="MissingConstraints" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardview5"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardview4">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="200dp"
-                android:layout_height="35dp"
-                android:text="Fee Statement"
-                android:textSize="25dp"
-                android:textStyle="bold"
-                tools:layout_editor_absoluteX="19dp"
-                tools:layout_editor_absoluteY="20dp"
-                tools:ignore="MissingConstraints" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
