@@ -1,4 +1,4 @@
-package com.emt.elimupay
+package com.emt.elimupay.retrofit
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

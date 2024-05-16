@@ -1,7 +1,6 @@
 package com.emt.elimupay
 
 import LoginRequest
-import RetrofitClient
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -12,6 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.emt.elimupay.di.AppModule
+import com.emt.elimupay.models.login
+import com.emt.elimupay.retrofit.ApiService
+import com.emt.elimupay.retrofit.RetrofitClient
 import com.google.android.material.textfield.TextInputEditText
 import retrofit2.Call
 import retrofit2.Callback
@@ -26,7 +28,6 @@ class Login : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
 
-        // Adjust the padding of the main layout to account for system UI areas
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -56,15 +57,15 @@ class Login : AppCompatActivity() {
 
 
     private fun login(email: String, password: String, cont: Context) {
-        //val call = apiService.loginUser(email, password)
+       // val call = apiService.login(LoginRequest(email, password))
         val retrofit = AppModule().apiCalls("")
         val loginCall = retrofit.login(LoginRequest(email, password))
 
-        loginCall.enqueue(object: Callback<LoginResponse>{
-            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+        loginCall.enqueue(object: Callback<login>{
+            override fun onResponse(call: Call<login>, response: Response<login>) {
                 if(response.isSuccessful){
                     if(response.body() != null){
-                        Toast.makeText(cont, "login successful", Toast.LENGTH_LONG).show()
+                        Toast.makeText(cont, response.body().toString(), Toast.LENGTH_LONG).show()
                         val intent = Intent(cont, MainActivity::class.java)
                         cont.startActivity(intent)
                     }else{
@@ -76,7 +77,7 @@ class Login : AppCompatActivity() {
 
                 }
             }
-            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+            override fun onFailure(call: Call<login>, t: Throwable) {
                 Toast.makeText(cont,t.message, Toast.LENGTH_LONG).show()
 
             }

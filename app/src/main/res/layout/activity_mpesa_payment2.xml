@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:padding="16dp"
     android:id="@+id/MpesaPaymentActivity"
-    tools:context=".MpesaPaymentActivity">
+    tools:context=".paymentmethods.MpesaPaymentActivity">
 
     <TextView
         android:id="@+id/textViewPayWithMpesa"

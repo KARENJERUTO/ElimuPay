@@ -16,13 +16,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="34">
         <activity
-            android:name=".BankConfirmation"
+            android:name=".paymentconfirmation.BankConfirmation"
             android:exported="false" />
         <activity
-            android:name=".MpesaConfirmation"
+            android:name=".paymentconfirmation.MpesaConfirmation"
             android:exported="false" />
         <activity
-            android:name=".Login"
+            android:name="com.emt.elimupay.Login"
             android:exported="true"
             android:theme="@style/Theme.ElimuPay.NoActionBar">
 
@@ -34,7 +34,7 @@
 <!--             </intent-filter>-->
         </activity>
         <activity
-            android:name=".eCitizenPaymentActivity"
+            android:name=".paymentmethods.eCitizenPaymentActivity"
             android:exported="true">
 
             <!-- <intent-filter> -->
@@ -45,7 +45,7 @@
             <!-- </intent-filter> -->
         </activity>
         <activity
-            android:name=".BankPaymentActivity"
+            android:name=".paymentmethods.BankPaymentActivity"
             android:exported="true">
 
             <!-- <intent-filter> -->
@@ -56,7 +56,7 @@
             <!-- </intent-filter> -->
         </activity>
         <activity
-            android:name=".MpesaPaymentActivity"
+            android:name=".paymentmethods.MpesaPaymentActivity"
             android:exported="true">
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
@@ -65,16 +65,16 @@
 <!--            </intent-filter>-->
         </activity>
         <activity
-            android:name=".ConfirmationActivity"
+            android:name=".paymentconfirmation.ConfirmationActivity"
             android:exported="true" />
         <activity
-            android:name=".CardPaymentActivity"
+            android:name=".paymentmethods.CardPaymentActivity"
             android:exported="true" />
         <activity
             android:name=".FeesStatementsActivity"
             android:exported="true" />
         <activity
-            android:name=".PaymentMethods"
+            android:name=".paymentmethods.PaymentMethods"
             android:exported="true">
 
             <!-- <intent-filter> -->
@@ -88,24 +88,24 @@
             android:name=".ResetPassword"
             android:exported="true"
             android:theme="@style/Theme.ElimuPay.NoActionBar" >
-         <intent-filter>
-         <action android:name="android.intent.action.MAIN" />
+<!--         <intent-filter>-->
+<!--         <action android:name="android.intent.action.MAIN" />-->
 
 
-         <category android:name="android.intent.category.LAUNCHER" />
-         </intent-filter>
+<!--         <category android:name="android.intent.category.LAUNCHER" />-->
+<!--         </intent-filter>-->
         </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name">
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
+<!--             <intent-filter>-->
+<!--             <action android:name="android.intent.action.MAIN" />-->
 
 
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
+<!--             <category android:name="android.intent.category.LAUNCHER" />-->
+<!--             </intent-filter>-->
         </activity>
     </application>
 

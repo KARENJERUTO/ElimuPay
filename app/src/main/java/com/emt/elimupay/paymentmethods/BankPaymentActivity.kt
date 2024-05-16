@@ -1,26 +1,25 @@
-package com.emt.elimupay
+package com.emt.elimupay.paymentmethods
 
-import android.content.Intent
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.emt.elimupay.R
 
-class MpesaConfirmation : AppCompatActivity() {
+class BankPaymentActivity : AppCompatActivity() {
+
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_mpesa_confirmation)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        setContentView(R.layout.activity_bank_payment)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.BankPaymentActivity)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-    }
-    fun confirmPayment(view: View) {
-        val intent = Intent(this, ConfirmationActivity::class.java)
-        startActivity(intent)
+
     }
 }

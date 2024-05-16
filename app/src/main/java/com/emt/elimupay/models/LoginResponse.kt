@@ -9,5 +9,5 @@ data class LoginResponse(
 ): Serializable
 
 data class ResetPasswordResponse(
-    val message: String // You can adjust this according to your API response
+    val message: String
 )

@@ -1,4 +1,4 @@
-package com.emt.elimupay
+package com.emt.elimupay.paymentmethods
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -8,6 +8,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.emt.elimupay.paymentconfirmation.MpesaConfirmation
+import com.emt.elimupay.R
 
 class MpesaPaymentActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
