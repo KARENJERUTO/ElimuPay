@@ -1,89 +1,67 @@
 package com.emt.elimupay
 
-import LoginRequest
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
+import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.emt.elimupay.di.AppModule
-import com.emt.elimupay.models.login
-import com.emt.elimupay.retrofit.ApiService
-import com.emt.elimupay.retrofit.RetrofitClient
-import com.google.android.material.textfield.TextInputEditText
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
-class Login : AppCompatActivity() {
-    private lateinit var apiService: ApiService
-
+class LoginActivity : AppCompatActivity() {
+//    private lateinit var apiService: ApiService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        // Initialize Retrofit
-
-        apiService = RetrofitClient.apiService
-
-        // Example login button click listener
-        val loginButton = findViewById<View>(R.id.login)
-        loginButton.setOnClickListener {
-            val email = findViewById<TextInputEditText>(R.id.username).text.toString().trim()
-            val password = findViewById<TextInputEditText>(R.id.password).text.toString().trim()
-
-            if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Please enter email and password", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-        }
+//        apiService = RetrofitClient.apiService
     }
 
+    fun showLogin(view: View) {
+        val emailEditText = findViewById<EditText>(R.id.username)
+        val passwordEditText = findViewById<EditText>(R.id.password)
+        val email = emailEditText.text.toString().trim()
+        val password = passwordEditText.text.toString().trim()
 
-
-
-
-    private fun login(email: String, password: String, cont: Context) {
-       // val call = apiService.login(LoginRequest(email, password))
-        val retrofit = AppModule().apiCalls("")
-        val loginCall = retrofit.login(LoginRequest(email, password))
-
-        loginCall.enqueue(object: Callback<login>{
-            override fun onResponse(call: Call<login>, response: Response<login>) {
-                if(response.isSuccessful){
-                    if(response.body() != null){
-                        Toast.makeText(cont, response.body().toString(), Toast.LENGTH_LONG).show()
-                        val intent = Intent(cont, MainActivity::class.java)
-                        cont.startActivity(intent)
-                    }else{
-                        Toast.makeText(cont, "Please enter email and password", Toast.LENGTH_LONG).show()
-
-                    }
-                }else{
-                    Toast.makeText(cont, "response not successful", Toast.LENGTH_LONG).show()
-
-                }
+        if (email.isEmpty() || password.isEmpty()) {
+            if (email.isEmpty()) {
+                emailEditText.error = "Please enter your email"
             }
-            override fun onFailure(call: Call<login>, t: Throwable) {
-                Toast.makeText(cont,t.message, Toast.LENGTH_LONG).show()
-
+            if (password.isEmpty()) {
+                passwordEditText.error = "Please enter your password"
             }
-
-        })
-
+            return
+        }
+//
+//        val call = apiService.login(email = email, password = password)
+//        call.enqueue(object : Callback<LoginResponse> {
+//            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+//                if (response.isSuccessful) {
+//                    val loginResponse = response.body()
+//                    if (loginResponse?.success == true) {
+//                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+//                        startActivity(intent)
+//                        finish()
+//                    } else {
+//                        Toast.makeText(this@LoginActivity, loginResponse?.message ?: "Login failed", Toast.LENGTH_SHORT).show()
+//                    }
+//                } else {
+//                    Toast.makeText(this@LoginActivity, "Login failed: ${response.message()}", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+//                Toast.makeText(this@LoginActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+//            }
+//        })
     }
 
     fun onForgotPasswordClicked(view: View) {
@@ -91,8 +69,3 @@ class Login : AppCompatActivity() {
         startActivity(intent)
     }
 }
-
-data class LoginResponse(
-    val success: Boolean,
-    val message: String
-)

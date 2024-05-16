@@ -22,16 +22,13 @@
             android:name=".paymentconfirmation.MpesaConfirmation"
             android:exported="false" />
         <activity
-            android:name="com.emt.elimupay.Login"
+            android:name="com.emt.elimupay.LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.ElimuPay.NoActionBar">
-
-<!--             <intent-filter>-->
-<!--             <action android:name="android.intent.action.MAIN" />-->
-
-
-<!--             <category android:name="android.intent.category.LAUNCHER" />-->
-<!--             </intent-filter>-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity
             android:name=".paymentmethods.eCitizenPaymentActivity"
@@ -72,7 +69,15 @@
             android:exported="true" />
         <activity
             android:name=".FeesStatementsActivity"
-            android:exported="true" />
+            android:exported="true" >
+
+             <intent-filter>
+             <action android:name="android.intent.action.MAIN" />
+
+
+             <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
+        </activity>
         <activity
             android:name=".paymentmethods.PaymentMethods"
             android:exported="true">

@@ -11,7 +11,6 @@ object HttpClient {
     val instance: OkHttpClient by lazy {
         OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
-            .addInterceptor(AuthInterceptor("admin", "1234")) // Add your credentials here
             .build()
     }
 }

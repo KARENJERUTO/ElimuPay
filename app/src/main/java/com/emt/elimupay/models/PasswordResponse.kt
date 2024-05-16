@@ -1,6 +1,5 @@
 package com.emt.elimupay.models
 
-data class LoginResponse(
-    val success: Boolean,
+data class ResetPasswordResponse(
     val message: String
 )

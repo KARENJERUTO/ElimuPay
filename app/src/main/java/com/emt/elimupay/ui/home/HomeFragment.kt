@@ -13,7 +13,7 @@ import com.emt.elimupay.FeesStatementsActivity
 import com.emt.elimupay.databinding.FragmentHomeBinding
 import com.emt.elimupay.models.BalanceResponse
 import com.emt.elimupay.paymentmethods.PaymentMethods
-import com.emt.elimupay.retrofit.ApiService
+import com.emt.elimupay.api.ApiService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

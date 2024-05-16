@@ -1,6 +1,5 @@
 package com.emt.elimupay
 
-import com.emt.elimupay.retrofit.RetrofitClient
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Button
@@ -10,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.emt.elimupay.models.ResetPasswordResponse
+import com.emt.elimupay.retrofit.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -42,7 +42,7 @@ class ResetPassword : AppCompatActivity() {
 
     private fun performResetPassword(email: String) {
         val resetPasswordRequest = ResetPasswordRequest(email)
-        RetrofitClient.apiService.resetPassword(resetPasswordRequest)
+        RetrofitClient.apiService.resetPassword()
             .enqueue(object : Callback<ResetPasswordResponse> {
                 override fun onResponse(
                     call: Call<ResetPasswordResponse>,
