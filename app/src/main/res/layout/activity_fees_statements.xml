@@ -19,12 +19,11 @@
             app:layout_constraintTop_toTopOf="parent"
             android:padding="16dp"/>
 
-
         <TextView
             android:id="@+id/textViewFromDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="From: 01-Jan-2024"
+            android:text=""
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textViewHeader"
@@ -34,12 +33,11 @@
             android:id="@+id/textViewToDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="To: 31-Jan-2024"
+            android:text=""
             android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@id/textViewFromDate"
             app:layout_constraintTop_toTopOf="@id/textViewFromDate"
             android:padding="8dp"/>
-
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewTransactions"
@@ -51,18 +49,15 @@
             app:layout_constraintBottom_toTopOf="@id/textViewTotalBalance"
             android:padding="8dp"/>
 
-
         <TextView
             android:id="@+id/textViewTotalBalance"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Total Balance: "
+            android:text=""
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textViewToDate"
+            app:layout_constraintTop_toBottomOf="@id/recyclerViewTransactions"
             android:padding="16dp"/>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

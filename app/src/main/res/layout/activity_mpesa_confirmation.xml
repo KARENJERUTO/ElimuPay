@@ -8,39 +8,68 @@
     tools:context=".paymentconfirmation.MpesaConfirmation">
 
     <TextView
-        android:id="@+id/text_confirmation_message"
-        android:layout_width="wrap_content"
+        android:id="@+id/textViewAmountPaid"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Payment Confirmation:"
-        android:textSize="30sp"
+        android:text="Amount Paid"
+        android:textSize="18sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"/>
 
-    <!-- Display payment details for confirmation -->
     <TextView
-        android:id="@+id/text_payment_details_confirmation"
-        android:layout_width="wrap_content"
+        android:id="@+id/textViewPaymentDate"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Student Unique ID:\nAmount:\nSchool:"
-        android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@id/text_confirmation_message"
+        android:text="Payment Date"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAmountPaid"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"/>
 
-    <!-- Button to confirm payment -->
+    <TextView
+        android:id="@+id/textViewPaymentMode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Payment Mode"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPaymentDate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/textViewReference"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Reference"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPaymentMode"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/textViewStudent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Student"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@+id/textViewReference"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
+
     <Button
-        android:id="@+id/btn_confirm_payment"
+        android:id="@+id/btnConfirmPayment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Confirm Payment"
-        android:textSize="20sp"
         android:onClick="confirmPayment"
-        app:layout_constraintTop_toBottomOf="@id/text_payment_details_confirmation"
+        app:layout_constraintTop_toBottomOf="@+id/textViewStudent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
-
+        android:layout_marginTop="16dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
