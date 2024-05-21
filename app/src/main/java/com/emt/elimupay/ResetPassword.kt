@@ -4,15 +4,18 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.emt.elimupay.models.ResetPasswordRequest
 import com.emt.elimupay.models.ResetPasswordResponse
 import com.emt.elimupay.retrofit.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.IOException
 
 class ResetPassword : AppCompatActivity() {
 
@@ -35,36 +38,39 @@ class ResetPassword : AppCompatActivity() {
             if (email.isNotEmpty()) {
                 performResetPassword(email)
             } else {
-                // Handle empty email case
+                Toast.makeText(this, "Please enter your email", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
     private fun performResetPassword(email: String) {
         val resetPasswordRequest = ResetPasswordRequest(email)
-        RetrofitClient.apiService.resetPassword()
+        RetrofitClient.apiService.resetPassword(resetPasswordRequest)
             .enqueue(object : Callback<ResetPasswordResponse> {
                 override fun onResponse(
                     call: Call<ResetPasswordResponse>,
                     response: Response<ResetPasswordResponse>
                 ) {
                     if (response.isSuccessful) {
-                        // Handle successful password reset
                         val resetPasswordResponse = response.body()
-                        // Access reset password response data
+                        if (resetPasswordResponse != null) {
+                            Toast.makeText(this@ResetPassword, resetPasswordResponse.message, Toast.LENGTH_LONG).show()
+                        } else {
+                            Toast.makeText(this@ResetPassword, "Error: Response body is null", Toast.LENGTH_LONG).show()
+                        }
                     } else {
-                        // Handle unsuccessful password reset
-                        // You can extract error message from response.errorBody()
+                        val errorBody = response.errorBody()?.string()
+                        Toast.makeText(this@ResetPassword, "Error: ${errorBody ?: "Unknown error"}", Toast.LENGTH_LONG).show()
                     }
                 }
 
                 override fun onFailure(call: Call<ResetPasswordResponse>, t: Throwable) {
-                    // Handle network failure
+                    if (t is IOException) {
+                        Toast.makeText(this@ResetPassword, "Network Failure: ${t.message}", Toast.LENGTH_LONG).show()
+                    } else {
+                        Toast.makeText(this@ResetPassword, "Conversion Issue: ${t.message}", Toast.LENGTH_LONG).show()
+                    }
                 }
             })
     }
-}
-
-class ResetPasswordRequest(email: String) {
-
 }

@@ -10,10 +10,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.emt.elimupay.FeesStatementsActivity
+import com.emt.elimupay.api.ApiService
 import com.emt.elimupay.databinding.FragmentHomeBinding
 import com.emt.elimupay.models.BalanceResponse
 import com.emt.elimupay.paymentmethods.PaymentMethods
-import com.emt.elimupay.api.ApiService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -54,7 +54,7 @@ class HomeFragment : Fragment() {
     }
   private fun fetchBalance(viewBalanceTextView: TextView) {
       val retrofit = Retrofit.Builder()
-          .baseUrl("http://192.168.88.188:8000/api/v1/")
+          .baseUrl("http://192.168.88.191:8000/api/v1/")
           .addConverterFactory(GsonConverterFactory.create())
           .build()
 

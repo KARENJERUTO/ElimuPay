@@ -8,7 +8,6 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.emt.elimupay.adapters.FeeEntityAdapter
-import com.emt.elimupay.models.FeeEntity
 import com.emt.elimupay.models.FeesResponse
 import com.emt.elimupay.retrofit.RetrofitClient
 import retrofit2.Call
@@ -38,15 +37,12 @@ class FeesStatementsActivity : AppCompatActivity() {
         val apiService = RetrofitClient.apiService
 
         // Make the API call
-        val call = apiService.getFees()
-        call.enqueue(object : Callback<FeesResponse> {
+        apiService.getFees().enqueue(object : Callback<FeesResponse> {
             override fun onResponse(call: Call<FeesResponse>, response: Response<FeesResponse>) {
                 if (response.isSuccessful) {
                     val feesResponse = response.body()
                     if (feesResponse != null) {
-                        // Assuming FeesResponse.entity is a list of FeeEntity
-                        @Suppress("UNCHECKED_CAST")
-                        val feeEntities = feesResponse.entity as List<FeeEntity>
+                        val feeEntities = feesResponse.entity
                         adapter = FeeEntityAdapter(feeEntities)
                         recyclerViewTransactions.adapter = adapter
                     } else {

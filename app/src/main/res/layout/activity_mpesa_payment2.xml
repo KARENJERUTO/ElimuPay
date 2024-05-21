@@ -15,6 +15,7 @@
         android:text="Pay with M-Pesa"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:textColor="#4F0020"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -96,8 +97,8 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mpesapay"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/button_bg"
+        android:layout_height="60dp"
+        android:backgroundTint="#4F0020"
         android:onClick="showPay"
         android:text="Pay"
         app:iconGravity="textStart"

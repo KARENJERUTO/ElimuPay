@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
 
     <application
         android:allowBackup="true"
@@ -20,7 +22,7 @@
             android:exported="false" />
         <activity
             android:name=".paymentconfirmation.MpesaConfirmation"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name="com.emt.elimupay.LoginActivity"
             android:exported="true"
@@ -52,6 +54,7 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
+
         <activity
             android:name=".paymentmethods.MpesaPaymentActivity"
             android:exported="true">
@@ -71,12 +74,12 @@
             android:name=".FeesStatementsActivity"
             android:exported="true" >
 
-             <intent-filter>
-             <action android:name="android.intent.action.MAIN" />
+<!--             <intent-filter>-->
+<!--             <action android:name="android.intent.action.MAIN" />-->
 
 
-             <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
+<!--             <category android:name="android.intent.category.LAUNCHER" />-->
+<!--             </intent-filter>-->
         </activity>
         <activity
             android:name=".paymentmethods.PaymentMethods"
@@ -105,12 +108,12 @@
             android:exported="true"
             android:label="@string/app_name">
 
-<!--             <intent-filter>-->
-<!--             <action android:name="android.intent.action.MAIN" />-->
+             <intent-filter>
+             <action android:name="android.intent.action.MAIN" />
 
 
-<!--             <category android:name="android.intent.category.LAUNCHER" />-->
-<!--             </intent-filter>-->
+             <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
         </activity>
     </application>
 

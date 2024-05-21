@@ -12,13 +12,15 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.emt.elimupay.R
 import com.emt.elimupay.api.ApiService
+import com.emt.elimupay.di.App2Module
 import com.emt.elimupay.models.MpesaResponse
 import com.emt.elimupay.paymentconfirmation.MpesaConfirmation
-import com.emt.elimupay.retrofit.RetrofitClient
 import com.google.android.material.textfield.TextInputEditText
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.IOException
 
 class MpesaPaymentActivity : AppCompatActivity() {
 
@@ -26,7 +28,9 @@ class MpesaPaymentActivity : AppCompatActivity() {
     private lateinit var editTextAmount: TextInputEditText
     private lateinit var editTextPhoneNumber: TextInputEditText
 
-    private val apiService: ApiService = RetrofitClient.apiService
+    private val apiService: ApiService by lazy {
+        App2Module.apiService
+    }
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,35 +54,37 @@ class MpesaPaymentActivity : AppCompatActivity() {
         val amount = editTextAmount.text.toString().trim()
         val phoneNumber = editTextPhoneNumber.text.toString().trim()
 
-        // Check if any of the fields are empty
         if (studentUniqueID.isEmpty() || amount.isEmpty() || phoneNumber.isEmpty()) {
             Toast.makeText(this, "Error: Some fields are empty. Please fill out all the required fields.", Toast.LENGTH_SHORT).show()
             return
         }
 
-        // Log input data for debugging
-        Log.d("MpesaPayment", "Initiating payment with StudentUniqueID: $studentUniqueID, Amount: $amount, PhoneNumber: $phoneNumber")
+        val requestBody = JSONObject().apply {
+            put("studentUniqueID", studentUniqueID)
+            put("amount", amount)
+            put("phoneNumber", phoneNumber)
+        }
 
-        // Make API call to initiate payment
-        apiService.initiateMpesaPayment(studentUniqueID, amount, phoneNumber).enqueue(object : Callback<MpesaResponse> {
+        apiService.initiateMpesaPayment(requestBody).enqueue(object : Callback<MpesaResponse> {
             override fun onResponse(call: Call<MpesaResponse>, response: Response<MpesaResponse>) {
                 if (response.isSuccessful) {
-                    // Payment initiated successfully, navigate to confirmation screen
-                    val mpesaResponse = response.body()
-                    Log.d("MpesaPayment", "Payment initiated successfully: $mpesaResponse")
-
-                    // Pass data to confirmation activity
-                    val intent = Intent(this@MpesaPaymentActivity, MpesaConfirmation::class.java).apply {
-                        putExtra("amount_paid", mpesaResponse?.amount_paid)
-                        putExtra("payment_date", mpesaResponse?.payment_date)
-                        putExtra("paymentmode", mpesaResponse?.paymentmode)
-                        putExtra("reference", mpesaResponse?.reference)
-                        putExtra("student", mpesaResponse?.student)
+                    response.body()?.let { mpesaResponse ->
+                        Log.d("MpesaPayment", "Payment initiated successfully: $mpesaResponse")
+                        Intent(this@MpesaPaymentActivity, MpesaConfirmation::class.java).apply {
+                            putExtra("amount_paid", mpesaResponse.amount_paid)
+                            putExtra("payment_date", mpesaResponse.payment_date)
+                            putExtra("paymentmode", mpesaResponse.paymentmode)
+                            putExtra("reference", mpesaResponse.reference)
+                            putExtra("student", mpesaResponse.student)
+                        }.also {
+                            startActivity(it)
+                        }
+                    } ?: run {
+                        Log.e("MpesaPayment", "Response body is null")
+                        Toast.makeText(this@MpesaPaymentActivity, "Payment initiation failed. Please try again.", Toast.LENGTH_SHORT).show()
                     }
-                    startActivity(intent)
                 } else {
-                    Log.e("MpesaPayment", "Unsuccessful response: ${response.errorBody()?.string()}")
-                    Toast.makeText(this@MpesaPaymentActivity, "Payment initiation failed. Please try again.", Toast.LENGTH_SHORT).show()
+                    handleError(response)
                 }
             }
 
@@ -87,5 +93,16 @@ class MpesaPaymentActivity : AppCompatActivity() {
                 Toast.makeText(this@MpesaPaymentActivity, "Network error. Please check your connection and try again.", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    private fun handleError(response: Response<MpesaResponse>) {
+        try {
+            val errorMessage = response.errorBody()?.string()
+            Log.e("MpesaPayment", "Unsuccessful response: $errorMessage")
+            Toast.makeText(this, "Payment initiation failed. Error: $errorMessage", Toast.LENGTH_SHORT).show()
+        } catch (ioEx: IOException) {
+            Log.e("MpesaPayment", "Error reading error message: ", ioEx)
+            Toast.makeText(this, "An error occurred while trying to read the error message.", Toast.LENGTH_SHORT).show()
+        }
     }
 }
