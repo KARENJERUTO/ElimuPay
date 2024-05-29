@@ -1,5 +1,3 @@
-package com.emt.elimupay.adapters
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,14 +23,22 @@ class FeeEntityAdapter(private val feeEntities: List<FeeEntity>) :
     override fun getItemCount(): Int = feeEntities.size
 
     class FeeEntityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val balanceTextView: TextView = itemView.findViewById(R.id.textViewBalance)
+        private val creditTextView: TextView = itemView.findViewById(R.id.textViewCredit)
+        private val debitTextView: TextView = itemView.findViewById(R.id.textViewDebit)
         private val descriptionTextView: TextView = itemView.findViewById(R.id.textViewDescription)
-        private val amountTextView: TextView = itemView.findViewById(R.id.textViewAmount)
-        private val dateTextView: TextView = itemView.findViewById(R.id.textViewDate)
+        private val idTextView: TextView = itemView.findViewById(R.id.textViewId)
+        private val studentIdTextView: TextView = itemView.findViewById(R.id.textViewStudentId)
+        private val transactionDateTextView: TextView = itemView.findViewById(R.id.textViewTransactionDate)
 
         fun bind(feeEntity: FeeEntity) {
-            descriptionTextView.text = feeEntity.description
-            amountTextView.text = feeEntity.amount
-            dateTextView.text = feeEntity.date
+            balanceTextView.text = "Balance: ${feeEntity.balance}"
+            creditTextView.text = "Credit: ${feeEntity.credit}"
+            debitTextView.text = "Debit: ${feeEntity.debit}"
+            descriptionTextView.text = "Description: ${feeEntity.description}"
+            idTextView.text = "ID: ${feeEntity.id}"
+            studentIdTextView.text = "Student ID: ${feeEntity.student_id}"
+            transactionDateTextView.text = "Transaction Date: ${feeEntity.transaction_date}"
         }
     }
 }

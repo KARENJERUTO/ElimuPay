@@ -22,7 +22,7 @@ class PaymentMethods : AppCompatActivity() {
 
     }
     fun payWithMpesa(view: View) {
-        val intent = Intent(this, MpesaPaymentActivity::class.java)
+        val intent = Intent(this, MpesaPayment::class.java)
         startActivity(intent)
     }
 

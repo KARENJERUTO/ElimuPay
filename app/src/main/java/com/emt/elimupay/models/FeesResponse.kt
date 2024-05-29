@@ -1,7 +1,9 @@
 package com.emt.elimupay.models
 
 data class FeesResponse(
-    val entity: List<FeeEntity>,
-    val message: String,
-    val status: Int
+    val amount_paid: String,
+    val payment_date: String,
+    val paymentmode: String,
+    val reference: String,
+    val student: String
 )

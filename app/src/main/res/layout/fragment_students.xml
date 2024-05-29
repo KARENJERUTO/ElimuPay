@@ -1,119 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:layout_editor_absoluteX="0dp"
-    tools:layout_editor_absoluteY="65dp">
+    android:layout_height="match_parent">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/etPaidFees"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:padding="16dp"
-        android:elevation="4dp"
-        app:cardBackgroundColor="#F5F5F5">
+        android:text="Student Info"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="16dp"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+</androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/tvSchoolName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="School Name"
-                android:textSize="20sp"
-                android:paddingBottom="8dp"
-                tools:ignore="HardcodedText" />
-
-            <EditText
-                android:id="@+id/etSchoolName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:text="Your School Name"
-                android:textSize="15sp"
-                tools:ignore="Autofill,HardcodedText,LabelFor,TextFields,TouchTargetSizeCheck,VisualLintTextFieldSize" />
-
-            <!-- Student Info -->
-            <TextView
-                android:id="@+id/tvStudentName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Student Name"
-                android:textSize="20sp"
-                android:paddingBottom="8dp"
-                tools:ignore="HardcodedText" />
-
-            <EditText
-                android:id="@+id/etStudentName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:text="Your Student Name"
-                android:textSize="15sp"
-                tools:ignore="Autofill,HardcodedText,LabelFor,TextFields,TouchTargetSizeCheck,VisualLintTextFieldSize" />
-
-            <TextView
-                android:id="@+id/tvadmission"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="ADM No"
-                android:textSize="20sp"
-                android:paddingBottom="8dp"
-                tools:ignore="HardcodedText" />
-
-            <EditText
-                android:id="@+id/etADMNo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:text="Your ADM No"
-                android:textSize="15sp"
-                tools:ignore="Autofill,HardcodedText,LabelFor,TextFields,TouchTargetSizeCheck,VisualLintTextFieldSize" />
-
-            <TextView
-                android:id="@+id/tvStudentClass"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Student Class"
-                android:textSize="20sp"
-                android:paddingBottom="8dp"
-                tools:ignore="HardcodedText" />
-
-            <EditText
-                android:id="@+id/etStudentClass"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:text="Your Student Class"
-                android:textSize="15sp"
-                tools:ignore="Autofill,HardcodedText,LabelFor,TextFields,TouchTargetSizeCheck,VisualLintTextFieldSize" />
-
-            <!-- Paid Fees Info -->
-            <TextView
-                android:id="@+id/tvPaidFees"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Fee Paid"
-                android:textSize="20sp"
-                android:paddingBottom="8dp"
-                tools:ignore="HardcodedText" />
-
-            <EditText
-                android:id="@+id/etPaidFees"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:text="Your Fee Paid"
-                android:textSize="15sp"
-                tools:ignore="Autofill,HardcodedText,LabelFor,TextFields,TouchTargetSizeCheck,VisualLintTextFieldSize" />
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-</RelativeLayout>

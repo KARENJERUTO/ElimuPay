@@ -1,18 +1,18 @@
 package com.emt.elimupay
 
+import FeeEntityAdapter
+import android.os.AsyncTask
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.emt.elimupay.adapters.FeeEntityAdapter
-import com.emt.elimupay.models.FeesResponse
-import com.emt.elimupay.retrofit.RetrofitClient
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.emt.elimupay.models.FeeEntity
+import org.json.JSONArray
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.net.HttpURLConnection
+import java.net.URL
 
 class FeesStatementsActivity : AppCompatActivity() {
 
@@ -21,41 +21,69 @@ class FeesStatementsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_fees_statements)
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
 
         recyclerViewTransactions = findViewById(R.id.recyclerViewTransactions)
         recyclerViewTransactions.layoutManager = LinearLayoutManager(this)
 
-        // Initialize Retrofit
-        val apiService = RetrofitClient.apiService
-
         // Make the API call
-        apiService.getFees().enqueue(object : Callback<FeesResponse> {
-            override fun onResponse(call: Call<FeesResponse>, response: Response<FeesResponse>) {
-                if (response.isSuccessful) {
-                    val feesResponse = response.body()
-                    if (feesResponse != null) {
-                        val feeEntities = feesResponse.entity
-                        adapter = FeeEntityAdapter(feeEntities)
-                        recyclerViewTransactions.adapter = adapter
-                    } else {
-                        println("FeesResponse is null")
+        FetchFeeEntitiesTask().execute()
+    }
+
+    inner class FetchFeeEntitiesTask : AsyncTask<Void, Void, List<FeeEntity>>() {
+
+        override fun doInBackground(vararg params: Void?): List<FeeEntity> {
+            val feeEntities = mutableListOf<FeeEntity>()
+
+            try {
+                val url = URL("http://192.168.90.64:8000/api/v1/fee/api/v1/fee/get_transactions_for_student/1/")
+                val connection = url.openConnection() as HttpURLConnection
+                connection.requestMethod = "GET"
+                connection.connect()
+
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    val inputStream = connection.inputStream
+                    val reader = BufferedReader(InputStreamReader(inputStream))
+                    val response = StringBuilder()
+                    var line: String?
+                    while (reader.readLine().also { line = it } != null) {
+                        response.append(line)
+                    }
+
+                    // Parse JSON response
+                    val jsonArray = JSONArray(response.toString())
+                    for (i in 0 until jsonArray.length()) {
+                        val jsonObject = jsonArray.getJSONObject(i)
+                        val feeEntity = FeeEntity(
+                            jsonObject.getInt("balance"),
+                            jsonObject.getInt("credit"),
+                            jsonObject.getInt("debit"),
+                            jsonObject.getString("description"),
+                            jsonObject.getInt("id"),
+                            jsonObject.getInt("student_id"),
+                            jsonObject.getString("transaction_date")
+                        )
+                        feeEntities.add(feeEntity)
                     }
                 } else {
-                    println("Request failed with code: ${response.code()}")
+                    Log.e("FeesStatementsActivity", "Request failed with code: $responseCode")
                 }
+            } catch (e: Exception) {
+                Log.e("FeesStatementsActivity", "Error: ${e.message}", e)
             }
 
-            override fun onFailure(call: Call<FeesResponse>, t: Throwable) {
-                println("Error: ${t.message}")
+            return feeEntities
+        }
+
+        override fun onPostExecute(result: List<FeeEntity>?) {
+            super.onPostExecute(result)
+            if (result != null) {
+                adapter = FeeEntityAdapter(result)
+                recyclerViewTransactions.adapter = adapter
+            } else {
+                Log.e("FeesStatementsActivity", "No data received from the server")
             }
-        })
+        }
     }
 }

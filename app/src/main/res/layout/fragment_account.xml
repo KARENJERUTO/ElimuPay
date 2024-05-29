@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:text="Fee Payment Status"
         android:textSize="20sp"
-        android:textColor="#4F0020"
+        android:textColor="#800000"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"

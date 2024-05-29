@@ -5,30 +5,31 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/logo"
+        android:icon="@drawable/school_logo"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/logo"
+        android:roundIcon="@drawable/school_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.ElimuPay"
         android:usesCleartextTraffic="true"
         tools:targetApi="34">
+
         <activity
             android:name=".paymentconfirmation.BankConfirmation"
             android:exported="false" />
-        <activity
-            android:name=".paymentconfirmation.MpesaConfirmation"
-            android:exported="true" />
+
         <activity
             android:name="com.emt.elimupay.LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.ElimuPay.NoActionBar">
+
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
+
+
 <!--                <category android:name="android.intent.category.LAUNCHER" />-->
 <!--            </intent-filter>-->
         </activity>
@@ -54,15 +55,14 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-
         <activity
-            android:name=".paymentmethods.MpesaPaymentActivity"
+            android:name=".paymentmethods.MpesaPayment"
             android:exported="true">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".paymentconfirmation.ConfirmationActivity"
@@ -71,15 +71,19 @@
             android:name=".paymentmethods.CardPaymentActivity"
             android:exported="true" />
         <activity
+            android:name=".paymentconfirmation.PaymentSuccessfulActivity"
+            android:exported="true" />
+
+        <activity
             android:name=".FeesStatementsActivity"
-            android:exported="true" >
+            android:exported="true">
 
-<!--             <intent-filter>-->
-<!--             <action android:name="android.intent.action.MAIN" />-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
 
 
-<!--             <category android:name="android.intent.category.LAUNCHER" />-->
-<!--             </intent-filter>-->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".paymentmethods.PaymentMethods"
@@ -95,26 +99,28 @@
         <activity
             android:name=".ResetPassword"
             android:exported="true"
-            android:theme="@style/Theme.ElimuPay.NoActionBar" >
-<!--         <intent-filter>-->
-<!--         <action android:name="android.intent.action.MAIN" />-->
+            android:theme="@style/Theme.ElimuPay.NoActionBar">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
 
 
-<!--         <category android:name="android.intent.category.LAUNCHER" />-->
-<!--         </intent-filter>-->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name">
 
-             <intent-filter>
-             <action android:name="android.intent.action.MAIN" />
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
 
 
-             <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
+
     </application>
 
 </manifest>
