@@ -1,11 +1,9 @@
 package com.emt.elimupay.paymentmethods
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.emt.elimupay.R
-import com.emt.elimupay.paymentconfirmation.PaymentSuccessfulActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.CoroutineScope
@@ -72,7 +70,7 @@ class MpesaPayment : AppCompatActivity() {
     private suspend fun makePaymentAsync(request: PaymentRequest): PaymentResponse {
         return withContext(Dispatchers.IO) {
             try {
-                val url = URL("http://192.168.91.228:8000/api/v1/payfee/fee-collection/")
+                val url = URL("http://192.168.89.139:8000/api/v1/payfee/fee-collection/")
                 val connection = url.openConnection() as HttpURLConnection
                 connection.requestMethod = "POST"
                 connection.setRequestProperty("Content-Type", "application/json")
@@ -84,14 +82,12 @@ class MpesaPayment : AppCompatActivity() {
                     put("amount_paid", request.amount)
                 }.toString()
 
-
-
                 OutputStreamWriter(connection.outputStream).use {
                     it.write(requestBody)
                     it.flush()
                 }
 
-                if (connection.responseCode == HttpURLConnection.HTTP_OK) {
+                if (connection.responseCode == HttpURLConnection.HTTP_CREATED) { // 201 Created
                     val response = connection.inputStream.bufferedReader().readText()
                     val jsonResponse = JSONObject(response)
 
@@ -105,7 +101,7 @@ class MpesaPayment : AppCompatActivity() {
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
-                PaymentResponse(false, "", "", "", "Payment failed due to an error")
+                PaymentResponse(false, "", "", "", "Payment failed due to an error: ${e.message}")
             }
         }
     }
@@ -113,11 +109,7 @@ class MpesaPayment : AppCompatActivity() {
     private fun handlePaymentResponse(response: PaymentResponse) {
         if (response.success) {
             val paymentDetails = "Payment successful: ${response.amountPaid} paid by ${response.student}. Phone number: ${response.phoneNumber}"
-            val intent = Intent(this, PaymentSuccessfulActivity::class.java).apply {
-                putExtra("paymentDetails", paymentDetails)
-            }
-            startActivity(intent)
-            finish()
+            Toast.makeText(this, paymentDetails, Toast.LENGTH_LONG).show()
         } else {
             Toast.makeText(this, response.message, Toast.LENGTH_SHORT).show()
         }

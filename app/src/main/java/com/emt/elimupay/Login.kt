@@ -54,7 +54,7 @@ class LoginActivity : AppCompatActivity() {
             return
         }
 
-        val url = "http://192.168.88.106:8001/api/v1/parents/parents/login/"
+        val url = "http://192.168.89.139:8000/api/v1/parents/parents/login/"
 
         val json = JSONObject().apply {
             put("username", username)

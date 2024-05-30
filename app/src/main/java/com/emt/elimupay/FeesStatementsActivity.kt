@@ -36,7 +36,7 @@ class FeesStatementsActivity : AppCompatActivity() {
             val feeEntities = mutableListOf<FeeEntity>()
 
             try {
-                val url = URL("http://192.168.90.64:8000/api/v1/fee/api/v1/fee/get_transactions_for_student/1/")
+                val url = URL("http://192.168.89.139:8000/api/v1/fee/api/v1/fee/get_transactions_for_student/1/")
                 val connection = url.openConnection() as HttpURLConnection
                 connection.requestMethod = "GET"
                 connection.connect()
