@@ -51,6 +51,8 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.recyclerview)
+    implementation(libs.volley)
+    implementation(libs.androidx.material3.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -60,6 +62,7 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
     implementation("com.google.android.material:material:1.5.0")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
+    implementation ("com.itextpdf:itext7-core:7.1.15")
     //noinspection GradleDependency
 
 //    implementation ("androidx.legacy:legacy-support-v4:1.0.0")

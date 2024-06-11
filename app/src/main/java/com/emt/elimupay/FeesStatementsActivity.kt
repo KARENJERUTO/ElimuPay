@@ -1,18 +1,25 @@
 package com.emt.elimupay
 
 import FeeEntityAdapter
+import android.content.Intent // Import Intent from android.content
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.emt.elimupay.models.FeeEntity
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import org.json.JSONArray
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.net.HttpURLConnection
-import java.net.URL
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+
+
 
 class FeesStatementsActivity : AppCompatActivity() {
 
@@ -30,60 +37,75 @@ class FeesStatementsActivity : AppCompatActivity() {
         FetchFeeEntitiesTask().execute()
     }
 
-    inner class FetchFeeEntitiesTask : AsyncTask<Void, Void, List<FeeEntity>>() {
+    fun downloadFeeStatement(view: View) {
+        if (::adapter.isInitialized) { // Check if adapter is initialized
+            val pdfGenerator = PdfGenerator()
+            val feeEntities = adapter.getFeeEntities() // Get the fee entities from the adapter
+            val outputFile = File(getExternalFilesDir(null), "fee_statement.pdf")
+
+            try {
+                val outputStream = FileOutputStream(outputFile)
+                pdfGenerator.generatePdf(feeEntities, outputStream)
+                outputStream.close()
+
+                // Notify the system that a new file has been created
+                val intent = Intent(Intent.ACTION_VIEW)
+                val uri = FileProvider.getUriForFile(this, "${packageName}.provider", outputFile)
+                intent.setDataAndType(uri, "application/pdf")
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                startActivity(intent)
+
+                Toast.makeText(this, "Fee statement downloaded successfully", Toast.LENGTH_SHORT).show()
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Toast.makeText(this, "Failed to download fee statement", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            Toast.makeText(this, "Adapter is not initialized", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private inner class FetchFeeEntitiesTask : AsyncTask<Void, Void, List<FeeEntity>>() {
 
         override fun doInBackground(vararg params: Void?): List<FeeEntity> {
             val feeEntities = mutableListOf<FeeEntity>()
+            val client = OkHttpClient()
 
             try {
-                val url = URL("http://192.168.89.139:8000/api/v1/fee/api/v1/fee/get_transactions_for_student/1/")
-                val connection = url.openConnection() as HttpURLConnection
-                connection.requestMethod = "GET"
-                connection.connect()
+                val url = "http://192.168.90.20:8000/api/v1/fee/api/v1/fee/get_transactions_for_student/5/"
+                val request = Request.Builder().url(url).build()
+                val response = client.newCall(request).execute()
 
-                val responseCode = connection.responseCode
-                if (responseCode == HttpURLConnection.HTTP_OK) {
-                    val inputStream = connection.inputStream
-                    val reader = BufferedReader(InputStreamReader(inputStream))
-                    val response = StringBuilder()
-                    var line: String?
-                    while (reader.readLine().also { line = it } != null) {
-                        response.append(line)
-                    }
-
-                    // Parse JSON response
-                    val jsonArray = JSONArray(response.toString())
+                val jsonData = response.body?.string()
+                if (jsonData != null) {
+                    val jsonArray = JSONArray(jsonData)
                     for (i in 0 until jsonArray.length()) {
                         val jsonObject = jsonArray.getJSONObject(i)
                         val feeEntity = FeeEntity(
-                            jsonObject.getInt("balance"),
-                            jsonObject.getInt("credit"),
-                            jsonObject.getInt("debit"),
-                            jsonObject.getString("description"),
-                            jsonObject.getInt("id"),
-                            jsonObject.getInt("student_id"),
-                            jsonObject.getString("transaction_date")
+                            id = jsonObject.getInt("id"),
+                            student_id = jsonObject.getInt("student_id"),
+                            description = jsonObject.getString("description"),
+                            debit = jsonObject.getInt("debit"),
+                            credit = jsonObject.getInt("credit"),
+                            balance = jsonObject.getInt("balance"),
+                            transaction_date = jsonObject.getString("transaction_date"),
+                            firstName = jsonObject.getString("firstName"),
+                            middleName = jsonObject.getString("middleName")
                         )
                         feeEntities.add(feeEntity)
                     }
-                } else {
-                    Log.e("FeesStatementsActivity", "Request failed with code: $responseCode")
                 }
-            } catch (e: Exception) {
+            } catch (e: IOException) {
                 Log.e("FeesStatementsActivity", "Error: ${e.message}", e)
             }
 
             return feeEntities
         }
 
-        override fun onPostExecute(result: List<FeeEntity>?) {
+        override fun onPostExecute(result: List<FeeEntity>) {
             super.onPostExecute(result)
-            if (result != null) {
-                adapter = FeeEntityAdapter(result)
-                recyclerViewTransactions.adapter = adapter
-            } else {
-                Log.e("FeesStatementsActivity", "No data received from the server")
-            }
+            adapter = FeeEntityAdapter(result)
+            recyclerViewTransactions.adapter = adapter
         }
     }
 }

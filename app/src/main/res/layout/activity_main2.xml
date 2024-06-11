@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity2">
+
+
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="School Payment Portal"
+            android:textSize="24sp"
+            android:textColor="#800000"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:id="@+id/textViewChooseMethod"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Choose Payment Method"
+            android:textColor="#800000"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@id/textViewTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupPaymentMethods"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/textViewChooseMethod"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:orientation="vertical"
+            android:layout_marginTop="16dp">
+
+            <RadioButton
+                android:id="@+id/radioButtonMpesa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mpesa"
+                android:textColor="#800000"/>
+
+            <RadioButton
+                android:id="@+id/radioButtonCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Card"
+                android:textColor="#800000"/>
+
+            <RadioButton
+                android:id="@+id/radioButtonBank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bank"
+                android:textColor="#800000"/>
+
+            <RadioButton
+                android:id="@+id/radioButtonECitizen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="eCitizen"
+                android:textColor="#800000"/>
+
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textViewPaymentDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter Payment Details"
+            android:textSize="18sp"
+            android:textColor="#800000"
+            app:layout_constraintTop_toBottomOf="@id/radioGroupPaymentMethods"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp" />
+
+    <EditText
+        android:id="@+id/editTextPaymentDetails"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="Payment Details"
+        android:textColor="#800000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewPaymentDetails"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/buttonPay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pay"
+        app:layout_constraintTop_toBottomOf="@id/editTextPaymentDetails"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:onClick="onPayButtonClick" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,9 @@ import com.emt.elimupay.models.FeeEntity
 class FeeEntityAdapter(private val feeEntities: List<FeeEntity>) :
     RecyclerView.Adapter<FeeEntityAdapter.FeeEntityViewHolder>() {
 
+    fun getFeeEntities(): List<FeeEntity> {
+        return feeEntities
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeeEntityViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.fee_entity, parent, false)
@@ -20,25 +23,27 @@ class FeeEntityAdapter(private val feeEntities: List<FeeEntity>) :
         holder.bind(feeEntity)
     }
 
-    override fun getItemCount(): Int = feeEntities.size
+    override fun getItemCount(): Int {
+        return feeEntities.size
+    }
 
-    class FeeEntityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val balanceTextView: TextView = itemView.findViewById(R.id.textViewBalance)
-        private val creditTextView: TextView = itemView.findViewById(R.id.textViewCredit)
-        private val debitTextView: TextView = itemView.findViewById(R.id.textViewDebit)
-        private val descriptionTextView: TextView = itemView.findViewById(R.id.textViewDescription)
-        private val idTextView: TextView = itemView.findViewById(R.id.textViewId)
-        private val studentIdTextView: TextView = itemView.findViewById(R.id.textViewStudentId)
-        private val transactionDateTextView: TextView = itemView.findViewById(R.id.textViewTransactionDate)
+    inner class FeeEntityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val textFirstName: TextView = itemView.findViewById(R.id.textFirstName)
+        private val textMiddleName: TextView = itemView.findViewById(R.id.textMiddleName)
+        private val textDescription: TextView = itemView.findViewById(R.id.textDescription)
+        private val textDebit: TextView = itemView.findViewById(R.id.textDebit)
+        private val textCredit: TextView = itemView.findViewById(R.id.textCredit)
+        private val textBalance: TextView = itemView.findViewById(R.id.textBalance)
+        private val textTransactionDate: TextView = itemView.findViewById(R.id.textTransactionDate)
 
         fun bind(feeEntity: FeeEntity) {
-            balanceTextView.text = "Balance: ${feeEntity.balance}"
-            creditTextView.text = "Credit: ${feeEntity.credit}"
-            debitTextView.text = "Debit: ${feeEntity.debit}"
-            descriptionTextView.text = "Description: ${feeEntity.description}"
-            idTextView.text = "ID: ${feeEntity.id}"
-            studentIdTextView.text = "Student ID: ${feeEntity.student_id}"
-            transactionDateTextView.text = "Transaction Date: ${feeEntity.transaction_date}"
+            textFirstName.text = feeEntity.firstName
+            textMiddleName.text = feeEntity.middleName
+            textDescription.text = feeEntity.description
+            textDebit.text = feeEntity.debit.toString()
+            textCredit.text = feeEntity.credit.toString()
+            textBalance.text = feeEntity.balance.toString()
+            textTransactionDate.text = feeEntity.transaction_date
         }
     }
 }

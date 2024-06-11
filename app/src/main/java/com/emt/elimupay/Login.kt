@@ -14,6 +14,7 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
+import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
 
@@ -34,137 +35,102 @@ class LoginActivity : AppCompatActivity() {
 //        apiCalls = AppModule().apiCalls("token")
     }
 
+        fun handleLogin(view: View) {
+            val usernameEditText = findViewById<EditText>(R.id.username)
+            val passwordEditText = findViewById<EditText>(R.id.password)
+            val username = usernameEditText.text.toString().trim()
+            val password = passwordEditText.text.toString().trim()
 
-    fun handleLogin(view: View) {
-        val usernameEditText = findViewById<EditText>(R.id.username)
-        val passwordEditText = findViewById<EditText>(R.id.password)
-        val username = usernameEditText.text.toString().trim()
-        val password = passwordEditText.text.toString().trim()
-
-        val progressBar: ProgressBar = findViewById(R.id.progressBar)
-        progressBar.visibility = View.VISIBLE
-
-        if (username.isEmpty() || password.isEmpty()) {
-            if (username.isEmpty()) {
-                usernameEditText.error = "Please enter your username"
-            }
-            if (password.isEmpty()) {
-                passwordEditText.error = "Please enter your password"
-            }
-            return
-        }
-
-        val url = "http://192.168.89.139:8000/api/v1/parents/parents/login/"
-
-        val json = JSONObject().apply {
-            put("username", username)
-            put("password", password)
-        }
-
-        val body = RequestBody.create(
-            "application/json; charset=utf-8".toMediaTypeOrNull(),
-            json.toString()
-        )
-
-        val request = Request.Builder()
-            .url(url)
-            .post(body)
-            .build()
-
-        val client = OkHttpClient()
-
-        client.newCall(request).enqueue(object : okhttp3.Callback {
-            override fun onFailure(call: okhttp3.Call, e: IOException) {
-                runOnUiThread {
-                    Toast.makeText(this@LoginActivity, "Login failed: ${e.message}", Toast.LENGTH_SHORT).show()
+            if (username.isEmpty() || password.isEmpty()) {
+                if (username.isEmpty()) {
+                    usernameEditText.error = "Please enter your username"
                 }
+                if (password.isEmpty()) {
+                    passwordEditText.error = "Please enter your password"
+                }
+                return
             }
 
-            override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
-                val responseBody = response.body?.string()
-                if (response.isSuccessful && responseBody != null) {
-                    try {
-                        val jsonResponse = JSONObject(responseBody)
-                        val status = jsonResponse.getInt("status")
-                        val message = jsonResponse.getString("message")
-                        runOnUiThread {
-                            progressBar.visibility = View.GONE
-                            if (status == 200) {
-                                Toast.makeText(this@LoginActivity, "Login successful!", Toast.LENGTH_SHORT).show()
-                                val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                                startActivity(intent)
-                                finish()
-                            } else {
-                                Toast.makeText(this@LoginActivity, "Login failed: $message", Toast.LENGTH_SHORT).show()
-                            }
-                        }
-                    } catch (e: Exception) {
-                        runOnUiThread {
-                            progressBar.visibility = View.GONE
-                            Toast.makeText(this@LoginActivity, "Login failed: Error parsing response", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                } else {
+            val progressBar: ProgressBar = findViewById(R.id.progressBar)
+            progressBar.visibility = View.VISIBLE
+
+            val url = "http://192.168.1.163:8000/api/v1/parents/parents/login/"
+            val json = JSONObject().apply {
+                put("username", username)
+                put("password", password)
+            }
+
+            val body = RequestBody.create(
+                "application/json; charset=utf-8".toMediaTypeOrNull(),
+                json.toString()
+            )
+
+            val request = Request.Builder()
+                .url(url)
+                .post(body)
+                .build()
+
+            val client = OkHttpClient()
+
+            client.newCall(request).enqueue(object : okhttp3.Callback {
+                override fun onFailure(call: okhttp3.Call, e: IOException) {
                     runOnUiThread {
                         progressBar.visibility = View.GONE
-                        Toast.makeText(this@LoginActivity, "Login failed: ${response.message}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@LoginActivity,
+                            "Login failed: ${e.message}",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
-            }
-        })
+
+                override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
+                    val responseBody = response.body?.string()
+                    if (responseBody != null) {
+                        try {
+                            val jsonResponse = JSONObject(responseBody)
+                            val status = jsonResponse.getInt("status")
+                            val message = jsonResponse.getString("message")
+                            runOnUiThread {
+                                progressBar.visibility = View.GONE
+                                if (status == 200) {
+                                    Toast.makeText(
+                                        this@LoginActivity,
+                                        "Login successful!",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                                    startActivity(intent)
+                                    finish()
+                                } else {
+                                    Toast.makeText(
+                                        this@LoginActivity,
+                                        "Login failed: $message",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            }
+                        } catch (e: JSONException) {
+                            runOnUiThread {
+                                progressBar.visibility = View.GONE
+                                Toast.makeText(
+                                    this@LoginActivity,
+                                    "Login failed: Error parsing response",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+                    } else {
+                        runOnUiThread {
+                            progressBar.visibility = View.GONE
+                            Toast.makeText(
+                                this@LoginActivity,
+                                "Login failed: Empty response",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                }
+            })
+        }
     }
-
-
-//    fun handleLoginx(view: View) {
-//        val usernameEditText = findViewById<EditText>(R.id.username)
-//        val passwordEditText = findViewById<EditText>(R.id.password)
-//        val username = usernameEditText.text.toString().trim()
-//        val password = passwordEditText.text.toString().trim()
-//
-//        if (username.isEmpty() || password.isEmpty()) {
-//            if (username.isEmpty()) {
-//                usernameEditText.error = "Please enter your username"
-//            }
-//            if (password.isEmpty()) {
-//                passwordEditText.error = "Please enter your password"
-//            }
-//            return
-//        }
-//
-//
-//        val loginRequest = LoginRequest(username, password)
-//        val call = apiCalls.login(loginRequest)
-//        call.enqueue(object : Callback<LoginResponse> {
-//            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-//                if (response.isSuccessful) {
-//                    val loginResponse = response.body()
-//                    if (loginResponse != null) {
-//                        if (loginResponse.success) {
-//                            // Login successful, navigate to MainActivity
-//                            val intent = Intent(this@LoginActivity, MainActivity::class.java)
-//                            startActivity(intent)
-//                            finish() // Close LoginActivity to prevent going back on Back press
-//                        } else {
-//                            // Login failed, show message
-//                            Toast.makeText(this@LoginActivity, loginResponse.message, Toast.LENGTH_SHORT).show()
-//                        }
-//                    } else {
-//                        Toast.makeText(this@LoginActivity, "Login failed", Toast.LENGTH_SHORT).show()
-//                    }
-//                } else {
-//                    Toast.makeText(this@LoginActivity, "Login failed: ${response.message()}", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-//                // Network failure or other errors
-//                Toast.makeText(this@LoginActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
-//            }
-//        })
-//    }
-
-    fun onForgotPasswordClicked(view: View) {
-        val intent = Intent(this, ResetPassword::class.java)
-        startActivity(intent)
-    }
-}

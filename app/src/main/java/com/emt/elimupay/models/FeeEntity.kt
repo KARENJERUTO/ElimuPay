@@ -1,11 +1,13 @@
 package com.emt.elimupay.models
 
 data class FeeEntity(
-    val balance: Int,
-    val credit: Int,
-    val debit: Int,
-    val description: String,
     val id: Int,
     val student_id: Int,
-    val transaction_date: String
+    val description: String,
+    val debit: Int,
+    val credit: Int,
+    val balance: Int,
+    val transaction_date: String,
+    val firstName: String,
+    val middleName: String
 )

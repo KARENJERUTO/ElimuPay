@@ -70,7 +70,7 @@ class MpesaPayment : AppCompatActivity() {
     private suspend fun makePaymentAsync(request: PaymentRequest): PaymentResponse {
         return withContext(Dispatchers.IO) {
             try {
-                val url = URL("http://192.168.89.139:8000/api/v1/payfee/fee-collection/")
+                val url = URL("http://192.168.1.163:8000/api/v1/payfee/fee-collection/")
                 val connection = url.openConnection() as HttpURLConnection
                 connection.requestMethod = "POST"
                 connection.setRequestProperty("Content-Type", "application/json")
