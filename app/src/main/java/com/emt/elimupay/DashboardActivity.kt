@@ -2,35 +2,55 @@ package com.emt.elimupay
 
 import StudentAdapter
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
+import android.util.Log
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import org.json.JSONArray
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.net.HttpURLConnection
-import java.net.URL
+import com.emt.elimupay.paymentmethods.PaymentMethods
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
+import org.json.JSONObject
 
 class DashboardActivity : AppCompatActivity() {
 
-    private lateinit var RecyclerView: RecyclerView
+    private lateinit var recyclerView: RecyclerView
     private lateinit var studentAdapter: StudentAdapter
+
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_dashboard)
 
-        RecyclerView = findViewById(R.id.RecyclerView)
-        RecyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView = findViewById(R.id.RecyclerView)
+
+        recyclerView.layoutManager = LinearLayoutManager(this)
         studentAdapter = StudentAdapter(emptyList())
-        RecyclerView.adapter = studentAdapter
+        recyclerView.adapter = studentAdapter
 
-        // Fetch data from backend
-        FetchDataTask().execute("http://192.168.91.17:8000/api/v1/students/")
+
+        val url = "http://192.168.90.20:8000/api/v1/studentsparents/students-by-parent/12345/"
+        FetchDataTask().execute(url)
+
+
+
+        val payFeeButton = findViewById<Button>(R.id.buttonPayFee)
+
+        // Check if payFeeButton is not null before setting the OnClickListener
+        payFeeButton?.setOnClickListener {
+            // Perform the action when the button is clicked
+            val intent = Intent(this@DashboardActivity, PaymentMethods::class.java)
+            startActivity(intent)
+            
+        }
     }
+
+
 
     private inner class FetchDataTask : AsyncTask<String, Void, List<Student>>() {
         override fun doInBackground(vararg params: String): List<Student> {
@@ -38,30 +58,31 @@ class DashboardActivity : AppCompatActivity() {
             val students = mutableListOf<Student>()
 
             try {
-                val url = URL(urlString)
-                val connection = url.openConnection() as HttpURLConnection
-                val inputStream = connection.inputStream
-                val bufferedReader = BufferedReader(InputStreamReader(inputStream))
-                val response = StringBuilder()
-                var line: String?
+                val client = OkHttpClient()
+                val request = Request.Builder()
+                    .url(urlString)
+                    .build()
 
-                while (bufferedReader.readLine().also { line = it } != null) {
-                    response.append(line)
+                val response: Response = client.newCall(request).execute()
+                val responseBodyString = response.body?.string()
+
+                if (response.isSuccessful && !responseBodyString.isNullOrEmpty()) {
+                    val jsonObject = JSONObject(responseBodyString)
+                    val dataArray = jsonObject.getJSONArray("data")
+
+                    for (i in 0 until dataArray.length()) {
+                        val studentObject = dataArray.getJSONObject(i)
+                        val firstName = studentObject.getString("firstName")
+                        val lastName = studentObject.getString("lastName")
+                        val balance = studentObject.getInt("balance")
+                        students.add(Student(firstName, lastName, balance))
+                    }
+
+                } else {
+                    Log.e("FetchDataTask", "Failed to fetch data: ${response.code}")
                 }
-
-                val jsonArray = JSONArray(response.toString())
-                for (i in 0 until jsonArray.length()) {
-                    val jsonObject = jsonArray.getJSONObject(i)
-                    val firstName = jsonObject.getString("firstName")
-                    val lastName = jsonObject.getString("lastName")
-                    val balance = jsonObject.getInt("balance")
-                    students.add(Student(firstName, lastName, balance))
-                }
-
-                bufferedReader.close()
-                inputStream.close()
-                connection.disconnect()
             } catch (e: Exception) {
+                Log.e("FetchDataTask", "Exception: ${e.message}")
                 e.printStackTrace()
             }
 
@@ -70,6 +91,7 @@ class DashboardActivity : AppCompatActivity() {
 
         override fun onPostExecute(result: List<Student>) {
             super.onPostExecute(result)
+            // Update UI with the fetched data
             studentAdapter.updateData(result)
         }
     }

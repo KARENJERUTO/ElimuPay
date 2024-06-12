@@ -1,5 +1,6 @@
 package com.emt.elimupay.paymentmethods
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -16,8 +17,6 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 class MpesaPayment : AppCompatActivity() {
-    private lateinit var studentUniqueIdInput: TextInputEditText
-    private lateinit var amountInput: TextInputEditText
     private lateinit var phoneNumberInput: TextInputEditText
     private lateinit var payButton: MaterialButton
 
@@ -25,39 +24,50 @@ class MpesaPayment : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mpesa_payment)
 
-        studentUniqueIdInput = findViewById(R.id.editTextStudentUniqueID)
-        amountInput = findViewById(R.id.editTextAmount)
-        phoneNumberInput = findViewById(R.id.editTextPhoneNumber)
+        phoneNumberInput = findViewById(R.id.editPhoneNumber)
         payButton = findViewById(R.id.mpesapay)
 
         payButton.setOnClickListener {
-            showPay()
+            showPaymentDialog()
         }
     }
 
-    private fun showPay() {
-        val studentUniqueId = studentUniqueIdInput.text.toString().trim()
-        val amount = amountInput.text.toString().trim()
-        val phoneNumber = phoneNumberInput.text.toString().trim()
-
-        if (studentUniqueId.isEmpty() || amount.isEmpty() || phoneNumber.isEmpty()) {
-            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        try {
-            val amountValue = amount.toDouble()
-            if (amountValue <= 0) {
-                Toast.makeText(this, "Enter a valid amount", Toast.LENGTH_SHORT).show()
-                return
+    private fun showPaymentDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Select Payment Type")
+        val paymentTypes = arrayOf("Full Payment", "Partial Payment")
+        builder.setItems(paymentTypes) { _, which ->
+            when (which) {
+                0 -> processPayment(PaymentRequest(phoneNumberInput.text.toString().trim()))
+                1 -> showPartialPaymentDialog()
             }
-        } catch (e: NumberFormatException) {
-            Toast.makeText(this, "Enter a valid amount", Toast.LENGTH_SHORT).show()
-            return
         }
+        builder.setNegativeButton("Cancel") { dialog, _ ->
+            dialog.dismiss()
+        }
+        val dialog = builder.create()
+        dialog.show()
+    }
 
-        val paymentRequest = PaymentRequest(studentUniqueId, amount, phoneNumber)
-        processPayment(paymentRequest)
+    private fun showPartialPaymentDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Enter Partial Amount")
+        val input = TextInputEditText(this)
+        builder.setView(input)
+        builder.setPositiveButton("Confirm") { dialog, _ ->
+            val amount = input.text.toString().trim()
+            if (amount.isNotEmpty()) {
+                processPayment(PaymentRequest(phoneNumberInput.text.toString().trim(), amount))
+            } else {
+                Toast.makeText(this, "Please enter an amount", Toast.LENGTH_SHORT).show()
+            }
+            dialog.dismiss()
+        }
+        builder.setNegativeButton("Cancel") { dialog, _ ->
+            dialog.dismiss()
+        }
+        val dialog = builder.create()
+        dialog.show()
     }
 
     private fun processPayment(request: PaymentRequest) {
@@ -77,9 +87,8 @@ class MpesaPayment : AppCompatActivity() {
                 connection.doOutput = true
 
                 val requestBody = JSONObject().apply {
-                    put("student", request.studentUniqueId)
                     put("phone_number", request.phoneNumber)
-                    put("amount_paid", request.amount)
+                    put("amount", request.amount) // Add amount for partial payment
                 }.toString()
 
                 OutputStreamWriter(connection.outputStream).use {
@@ -91,24 +100,22 @@ class MpesaPayment : AppCompatActivity() {
                     val response = connection.inputStream.bufferedReader().readText()
                     val jsonResponse = JSONObject(response)
 
-                    val student = jsonResponse.getString("student")
                     val phoneNumber = jsonResponse.getString("phone_number")
-                    val amountPaid = jsonResponse.getString("amount_paid")
 
-                    PaymentResponse(true, student, phoneNumber, amountPaid, null)
+                    PaymentResponse(true, phoneNumber, null)
                 } else {
-                    PaymentResponse(false, "", "", "", "Payment failed with status code: ${connection.responseCode}")
+                    PaymentResponse(false, "", "Payment failed with status code: ${connection.responseCode}")
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
-                PaymentResponse(false, "", "", "", "Payment failed due to an error: ${e.message}")
+                PaymentResponse(false, "", "Payment failed due to an error: ${e.message}")
             }
         }
     }
 
     private fun handlePaymentResponse(response: PaymentResponse) {
         if (response.success) {
-            val paymentDetails = "Payment successful: ${response.amountPaid} paid by ${response.student}. Phone number: ${response.phoneNumber}"
+            val paymentDetails = "Payment successful for phone number: ${response.phoneNumber}"
             Toast.makeText(this, paymentDetails, Toast.LENGTH_LONG).show()
         } else {
             Toast.makeText(this, response.message, Toast.LENGTH_SHORT).show()
@@ -116,5 +123,5 @@ class MpesaPayment : AppCompatActivity() {
     }
 }
 
-data class PaymentRequest(val studentUniqueId: String, val amount: String, val phoneNumber: String)
-data class PaymentResponse(val success: Boolean, val student: String, val phoneNumber: String, val amountPaid: String, val message: String?)
+data class PaymentRequest(val phoneNumber: String, val amount: String? = null) // Add amount field
+data class PaymentResponse(val success: Boolean, val phoneNumber: String, val message: String?)

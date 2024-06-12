@@ -33,6 +33,8 @@ class HomeFragment : Fragment() {
         viewBalanceTextView = binding.textViewBalance
         welcomeTextView = binding.textViewWelcome
 
+        // Set the welcome message
+        welcomeTextView.text = "Welcome!"
         binding.cardview1.setOnClickListener {
             // Start the activity you want to navigate to
             val intent = Intent(activity, DashboardActivity::class.java)

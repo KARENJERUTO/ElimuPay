@@ -53,6 +53,9 @@
         android:layout_margin="16dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="2dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
         android:backgroundTint="#CCCCCC"
         app:layout_constraintTop_toBottomOf="@+id/textViewNotifications"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,26 +66,18 @@
             android:layout_height="match_parent"
             android:padding="16dp">
 
+
             <TextView
                 android:id="@+id/textViewBalance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Student"
+                android:text="My Students"
                 android:drawableLeft="@drawable/student_icon"
                 android:layout_marginTop="8dp"
                 android:textSize="30sp"
                 android:textColor="#800000"
                 android:textStyle="bold"/>
 
-            <TextView
-                android:id="@+id/textViewPaymentInstructions"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textViewBalance"
-                android:layout_marginTop="8dp"
-                android:text="Instructions for payment..."
-                android:textSize="16sp"
-                android:textColor="#000000"/>
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
@@ -95,6 +90,9 @@
         android:padding="8dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="2dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
         android:backgroundTint="#CCCCCC"
         app:layout_constraintTop_toBottomOf="@+id/cardview1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -126,6 +124,9 @@
         android:padding="8dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="2dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
         android:backgroundTint="#CCCCCC"
         app:layout_constraintTop_toBottomOf="@+id/cardview2"
         app:layout_constraintEnd_toEndOf="parent"
