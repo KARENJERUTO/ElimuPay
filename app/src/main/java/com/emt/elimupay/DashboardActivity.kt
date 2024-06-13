@@ -2,15 +2,12 @@ package com.emt.elimupay
 
 import StudentAdapter
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.emt.elimupay.paymentmethods.PaymentMethods
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
@@ -20,7 +17,6 @@ class DashboardActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var studentAdapter: StudentAdapter
-
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,23 +29,10 @@ class DashboardActivity : AppCompatActivity() {
         studentAdapter = StudentAdapter(emptyList())
         recyclerView.adapter = studentAdapter
 
-
         val url = "http://192.168.90.20:8000/api/v1/studentsparents/students-by-parent/12345/"
         FetchDataTask().execute(url)
 
-
-
-        val payFeeButton = findViewById<Button>(R.id.buttonPayFee)
-
-        // Check if payFeeButton is not null before setting the OnClickListener
-        payFeeButton?.setOnClickListener {
-            // Perform the action when the button is clicked
-            val intent = Intent(this@DashboardActivity, PaymentMethods::class.java)
-            startActivity(intent)
-            
-        }
     }
-
 
 
     private inner class FetchDataTask : AsyncTask<String, Void, List<Student>>() {
