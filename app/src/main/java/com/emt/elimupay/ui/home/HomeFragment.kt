@@ -9,9 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.emt.elimupay.DashboardActivity
-import com.emt.elimupay.FeeStructureActivity
-import com.emt.elimupay.FeesStatementsActivity
+import com.emt.elimupay.student.DashboardActivity
+import com.emt.elimupay.feestructure.FeeStructureActivity
+import com.emt.elimupay.feestatement.FeesStatementsActivity
 import com.emt.elimupay.databinding.FragmentHomeBinding
 
 

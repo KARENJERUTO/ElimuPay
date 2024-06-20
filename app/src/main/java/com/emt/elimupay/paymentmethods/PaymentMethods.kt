@@ -41,6 +41,9 @@ class PaymentMethods : AppCompatActivity() {
         startActivity(intent)
     }
 
-
+    fun payWithLipaMdogoMdogo(view: View) {
+        val intent = Intent(this, LipaMdogoMdogo::class.java)
+        startActivity(intent)
+    }
 
 }

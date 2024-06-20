@@ -1,4 +1,4 @@
-package com.emt.elimupay
+package com.emt.elimupay.feestatement
 
 import FeeEntityAdapter
 import android.content.Intent // Import Intent from android.content
@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.emt.elimupay.pdf.PdfGenerator
+import com.emt.elimupay.R
 import com.emt.elimupay.models.FeeEntity
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -72,7 +74,7 @@ class FeesStatementsActivity : AppCompatActivity() {
             val client = OkHttpClient()
 
             try {
-                val url = "http://192.168.90.20:8000/api/v1/fee/api/v1/fee/get_transactions_for_student/5/"
+                val url = "http://192.168.89.21:8000/api/v1/fee/api/v1/fee/get_transactions_for_student/5/"
                 val request = Request.Builder().url(url).build()
                 val response = client.newCall(request).execute()
 

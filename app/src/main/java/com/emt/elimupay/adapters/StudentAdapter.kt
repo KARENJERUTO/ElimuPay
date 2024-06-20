@@ -1,3 +1,5 @@
+package com.emt.elimupay.adapters
+
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
@@ -6,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.emt.elimupay.R
-import com.emt.elimupay.Student
+import com.emt.elimupay.models.Student
 import com.emt.elimupay.paymentmethods.PaymentMethods
 import com.google.android.material.button.MaterialButton
 
@@ -37,7 +39,7 @@ class StudentAdapter(private var students: List<Student>) : RecyclerView.Adapter
         holder.firstNameTextView.text = "First Name: ${student.firstName}"
         holder.lastNameTextView.text = "Last Name: ${student.lastName}"
         holder.balanceTextView.text = "Balance: ${student.balance}"
-        Log.d("StudentAdapter", "Binding student: ${student.firstName} ${student.lastName}")
+        Log.d("com.emt.elimupay.adapters.StudentAdapter", "Binding student: ${student.firstName} ${student.lastName}")
     }
 
     override fun getItemCount(): Int {
@@ -47,6 +49,6 @@ class StudentAdapter(private var students: List<Student>) : RecyclerView.Adapter
     fun updateData(newStudents: List<Student>) {
         students = newStudents
         notifyDataSetChanged()
-        Log.d("StudentAdapter", "Data updated. Count: ${students.size}")
+        Log.d("com.emt.elimupay.adapters.StudentAdapter", "Data updated. Count: ${students.size}")
     }
 }

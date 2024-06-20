@@ -1,4 +1,4 @@
-package com.emt.elimupay
+package com.emt.elimupay.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +10,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.emt.elimupay.mainapp.MainActivity
+import com.emt.elimupay.R
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -54,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
             val progressBar: ProgressBar = findViewById(R.id.progressBar)
             progressBar.visibility = View.VISIBLE
 
-            val url = "http://192.168.1.163:8000/api/v1/parents/parents/login/"
+            val url = "http://192.168.89.21:8000/api/v1/parents/parents/login/"
             val json = JSONObject().apply {
                 put("username", username)
                 put("password", password)

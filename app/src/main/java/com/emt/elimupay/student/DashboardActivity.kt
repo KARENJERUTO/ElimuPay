@@ -1,6 +1,6 @@
-package com.emt.elimupay
+package com.emt.elimupay.student
 
-import StudentAdapter
+import com.emt.elimupay.adapters.StudentAdapter
 import android.annotation.SuppressLint
 import android.os.AsyncTask
 import android.os.Bundle
@@ -8,6 +8,8 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.emt.elimupay.R
+import com.emt.elimupay.models.Student
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
@@ -29,7 +31,7 @@ class DashboardActivity : AppCompatActivity() {
         studentAdapter = StudentAdapter(emptyList())
         recyclerView.adapter = studentAdapter
 
-        val url = "http://192.168.90.20:8000/api/v1/studentsparents/students-by-parent/12345/"
+        val url = "http://192.168.89.21:8000/api/v1/studentsparents/students-by-parent/12345/"
         FetchDataTask().execute(url)
 
     }
