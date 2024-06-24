@@ -69,7 +69,7 @@
             android:name=".paymentconfirmation.BankConfirmation"
             android:exported="false" />
         <activity
-            android:name=".login.LoginActivity"
+            android:name=".auth.LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.ElimuPay.NoActionBar">
             <intent-filter>
@@ -143,7 +143,7 @@
             <!-- </intent-filter> -->
         </activity>
         <activity
-            android:name=".login.ResetPassword"
+            android:name=".auth.ResetPassword"
             android:exported="true"
             android:theme="@style/Theme.ElimuPay.NoActionBar">
 

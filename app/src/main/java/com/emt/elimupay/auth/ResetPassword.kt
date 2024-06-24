@@ -1,4 +1,4 @@
-package com.emt.elimupay.login
+package com.emt.elimupay.auth
 
 import android.annotation.SuppressLint
 import android.os.Bundle

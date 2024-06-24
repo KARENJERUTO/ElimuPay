@@ -1,4 +1,4 @@
-package com.emt.elimupay.login
+package com.emt.elimupay.auth
 
 import android.content.Intent
 import android.os.Bundle
