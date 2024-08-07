@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+
 }
 
 android {
@@ -53,6 +54,7 @@ dependencies {
     implementation(libs.androidx.recyclerview)
     implementation(libs.volley)
     implementation(libs.androidx.material3.android)
+    implementation(libs.support.annotations)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -68,4 +70,5 @@ dependencies {
 //    implementation ("androidx.legacy:legacy-support-v4:1.0.0")
 //    implementation ("androidx.navigation:navigation-fragment-ktx:2.4.1")
 //    implementation ("androidx.navigation:navigation-ui-ktx:2.4.1")
+    
 }

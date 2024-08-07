@@ -28,18 +28,23 @@ class MpesaPayment : AppCompatActivity() {
         payButton = findViewById(R.id.mpesapay)
 
         payButton.setOnClickListener {
-            showPaymentDialog()
+            val phoneNumber = phoneNumberInput.text.toString().trim()
+            if (phoneNumber.isNotEmpty()) {
+                showPaymentDialog(phoneNumber)
+            } else {
+                Toast.makeText(this, "Please enter a phone number", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
-    private fun showPaymentDialog() {
+    private fun showPaymentDialog(phoneNumber: String) {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Select Payment Type")
         val paymentTypes = arrayOf("Full Payment", "Partial Payment")
         builder.setItems(paymentTypes) { _, which ->
             when (which) {
-                0 -> processPayment(PaymentRequest(phoneNumberInput.text.toString().trim()))
-                1 -> showPartialPaymentDialog()
+                0 -> processPayment(PaymentRequest(phoneNumber))
+                1 -> showPartialPaymentDialog(phoneNumber)
             }
         }
         builder.setNegativeButton("Cancel") { dialog, _ ->
@@ -49,7 +54,7 @@ class MpesaPayment : AppCompatActivity() {
         dialog.show()
     }
 
-    private fun showPartialPaymentDialog() {
+    private fun showPartialPaymentDialog(phoneNumber: String) {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Enter Partial Amount")
         val input = TextInputEditText(this)
@@ -57,7 +62,7 @@ class MpesaPayment : AppCompatActivity() {
         builder.setPositiveButton("Confirm") { dialog, _ ->
             val amount = input.text.toString().trim()
             if (amount.isNotEmpty()) {
-                processPayment(PaymentRequest(phoneNumberInput.text.toString().trim(), amount))
+                processPayment(PaymentRequest(phoneNumber, amount))
             } else {
                 Toast.makeText(this, "Please enter an amount", Toast.LENGTH_SHORT).show()
             }
@@ -80,7 +85,7 @@ class MpesaPayment : AppCompatActivity() {
     private suspend fun makePaymentAsync(request: PaymentRequest): PaymentResponse {
         return withContext(Dispatchers.IO) {
             try {
-                val url = URL("http://192.168.1.163:8000/api/v1/payfee/fee-collection/")
+                val url = URL("http://192.168.89.168:8000/api/v1/mpesa/lipa_na_mpesa/254704754722/1")
                 val connection = url.openConnection() as HttpURLConnection
                 connection.requestMethod = "POST"
                 connection.setRequestProperty("Content-Type", "application/json")
@@ -88,7 +93,7 @@ class MpesaPayment : AppCompatActivity() {
 
                 val requestBody = JSONObject().apply {
                     put("phone_number", request.phoneNumber)
-                    put("amount", request.amount) // Add amount for partial payment
+                    put("amount", request.amount ?: "1000") // Default amount if not provided
                 }.toString()
 
                 OutputStreamWriter(connection.outputStream).use {
@@ -123,5 +128,5 @@ class MpesaPayment : AppCompatActivity() {
     }
 }
 
-data class PaymentRequest(val phoneNumber: String, val amount: String? = null) // Add amount field
+data class PaymentRequest(val phoneNumber: String, val amount: String? = null)
 data class PaymentResponse(val success: Boolean, val phoneNumber: String, val message: String?)

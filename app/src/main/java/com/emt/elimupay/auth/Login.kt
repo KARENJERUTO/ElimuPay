@@ -56,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
             val progressBar: ProgressBar = findViewById(R.id.progressBar)
             progressBar.visibility = View.VISIBLE
 
-            val url = "http://192.168.89.21:8000/api/v1/parents/parents/login/"
+            val url = "http://192.168.90.244:8000/api/v1/parents/parents/login/"
             val json = JSONObject().apply {
                 put("username", username)
                 put("password", password)

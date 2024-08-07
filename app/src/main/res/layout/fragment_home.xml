@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
-
-
     <TextView
         android:id="@+id/textViewWelcome"
         android:layout_width="wrap_content"
@@ -46,109 +44,112 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardview1"
-        android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="2dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?attr/selectableItemBackground"
-        android:backgroundTint="#CCCCCC"
+    <LinearLayout
+        android:id="@+id/cardContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="16dp"
+        android:background="#800000"
         app:layout_constraintTop_toBottomOf="@+id/textViewNotifications"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <RelativeLayout
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp">
+            android:layout_height="110dp"
+            android:layout_margin="16dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="2dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:backgroundTint="#CCCCCC">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
 
-            <TextView
-                android:id="@+id/textViewBalance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="My Students"
-                android:drawableLeft="@drawable/student_icon"
-                android:layout_marginTop="8dp"
-                android:textSize="30sp"
-                android:textColor="#800000"
-                android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/textViewBalance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="My \nStudents"
+                    android:drawableLeft="@drawable/student_icon"
+                    android:layout_marginTop="8dp"
+                    android:textSize="30sp"
+                    android:textColor="#800000"
+                    android:textStyle="bold" />
 
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
 
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardview2"
-        android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:layout_margin="16dp"
-        android:padding="8dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="2dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?attr/selectableItemBackground"
-        android:backgroundTint="#CCCCCC"
-        app:layout_constraintTop_toBottomOf="@+id/cardview1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <RelativeLayout
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp">
+            android:layout_height="110dp"
+            android:layout_margin="16dp"
+            android:padding="8dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="2dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:backgroundTint="#CCCCCC">
 
-            <TextView
-                android:id="@+id/feeStatement"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Fee Statement"
-                android:drawableLeft="@drawable/reports"
-                android:drawablePadding="8dp"
-                android:textSize="30sp"
-                android:textColor="#800000"
-                android:textStyle="bold" />
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardviewFeeStructure"
-        android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:layout_margin="16dp"
-        android:padding="8dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="2dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?attr/selectableItemBackground"
-        android:backgroundTint="#CCCCCC"
-        app:layout_constraintTop_toBottomOf="@+id/cardview2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+                <TextView
+                    android:id="@+id/feeStatement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fee Statement"
+                    android:drawableLeft="@drawable/reports"
+                    android:drawablePadding="10dp"
+                    android:textSize="30sp"
+                    android:textColor="#800000"
+                    android:textStyle="bold" />
 
-        <RelativeLayout
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardviewFeeStructure"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp">
+            android:layout_height="110dp"
+            android:layout_margin="16dp"
+            android:padding="10dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="2dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:backgroundTint="#CCCCCC">
 
-            <TextView
-                android:id="@+id/feeStructure"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Fee Structure"
-                android:drawableLeft="@drawable/feestatements"
-                android:drawablePadding="8dp"
-                android:textSize="30sp"
-                android:textColor="#800000"
-                android:textStyle="bold" />
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/feeStructure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fee\nStructure"
+                    android:drawableLeft="@drawable/feestatements"
+                    android:drawablePadding="8dp"
+                    android:textSize="30sp"
+                    android:textColor="#800000"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/progressBar"

@@ -1,5 +1,6 @@
 package com.emt.elimupay.api
 
+import com.emt.elimupay.StudentListResponse
 import com.emt.elimupay.models.MpesaRequest
 import com.emt.elimupay.models.MpesaResponse
 import com.emt.elimupay.models.MyStudentsResponse
@@ -9,6 +10,7 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface ApiService {
 
@@ -25,6 +27,8 @@ interface ApiService {
     @POST("mpesa/lipa_na_mpesa/")
     fun initiateMpesaPayment(@Body request: MpesaRequest): Call<MpesaResponse>
 
-    @GET("studentsparents/1/")
-    fun getStudents(): Call<List<MyStudentsResponse>>
+
+
+  //  @GET("studentlist")
+//  suspend fun getStudentList(@Query("parentID") parentID: Int): List<StudentListResponse>
 }
