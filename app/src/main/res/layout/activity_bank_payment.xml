@@ -6,14 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
+    android:background="#0A220F"
     android:id="@+id/BankPaymentActivity"
     tools:context=".paymentmethods.BankPaymentActivity">
 
     <ImageView
         android:id="@+id/iconImageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="250dp"
+        android:layout_height="150dp"
         android:src="@drawable/equity"
+        android:background="@color/white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -25,52 +27,60 @@
         android:text="Pay with Equity"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="#800000"
+        android:textColor="#FFFFFF"
         app:layout_constraintTop_toBottomOf="@id/iconImageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"/>
+        android:layout_marginTop="16dp"/>
 
-    <!-- Account Selection Dropdown -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/accountSelectionInputLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <!-- CardView -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Select Account"
+        android:layout_marginTop="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
         app:layout_constraintTop_toBottomOf="@id/titleTextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp">
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/accountSelectionAutoComplete"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="8dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="8dp"
-            android:paddingBottom="8dp"
-            tools:ignore="TouchTargetSizeCheck" />
+            android:orientation="vertical"
+            android:padding="16dp">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <!-- Account Selection Dropdown -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/accountSelectionInputLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Select Account">
 
-    <!-- Pay Button -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/payButton"
-        android:backgroundTint="#800000"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:text="Pay"
-        app:layout_constraintTop_toBottomOf="@+id/accountSelectionInputLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"/>
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/accountSelectionAutoComplete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="8dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="8dp"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Pay Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/payButton"
+                android:backgroundTint="#CC5500"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Pay"
+                android:layout_marginTop="16dp"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

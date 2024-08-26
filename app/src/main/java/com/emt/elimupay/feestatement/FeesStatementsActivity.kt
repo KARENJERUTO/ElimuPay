@@ -74,7 +74,7 @@ class FeesStatementsActivity : AppCompatActivity() {
             val client = OkHttpClient()
 
             try {
-                val url = "http://192.168.90.244:8000/api/v1/fee/api/v1/fee/get_transactions_for_student/1/"
+                val url = "http://192.168.1.105:8003/api/v1/fee/api/v1/fee/get_transactions_for_student/3/"
                 val request = Request.Builder().url(url).build()
                 val response = client.newCall(request).execute()
 

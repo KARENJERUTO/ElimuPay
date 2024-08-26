@@ -1,191 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#0A220F"
     tools:context=".paymentmethods.CardPaymentActivity">
 
-    <!-- "Pay with Card" TextView -->
-    <TextView
-        android:id="@+id/tvPayWithCard"
-        android:layout_width="wrap_content"
+    <!-- CardView containing the TextViews, EditTexts, and Button -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewPayment"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Pay with Card"
-        android:textSize="24sp"
-        android:textColor="#800000"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="6dp"
+        app:cardBackgroundColor="#1E3D2F"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp" />
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <!-- Card Image -->
-    <ImageView
-        android:id="@+id/ivCardImage"
-        android:layout_width="400dp"
-        android:layout_height="200dp"
-        android:src="@drawable/cardbackground_world"
-        app:layout_constraintTop_toBottomOf="@id/tvPayWithCard"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:contentDescription="Card Image" />
-
-    <!-- Card Number Label -->
-    <TextView
-        android:id="@+id/tvCardNumberLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Card Number"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/ivCardImage"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
-
-    <!-- Card Number -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilCardNumber"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvCardNumberLabel"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp">
-
-        <EditText
-            android:id="@+id/etCardNumber"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Card Number"
-            android:inputType="number"
-            android:background="#cccccc" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:orientation="vertical"
+            android:padding="16dp">
 
-    <!-- Card Type Image -->
-    <ImageView
-        android:id="@+id/ivCardType"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        app:layout_constraintTop_toBottomOf="@id/tilCardNumber"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="8dp"
-        android:contentDescription="Card Type" />
+            <!-- Pay with Card TextView -->
+            <TextView
+                android:id="@+id/tvPayWithCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pay with Card"
+                android:textSize="24sp"
+                android:textColor="#FFFFFF"
+                android:gravity="center"
+                android:layout_marginBottom="16dp" />
 
-    <!-- Name on Card Label -->
-    <TextView
-        android:id="@+id/tvNameOnCardLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Name on Card"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/ivCardType"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp" />
+            <!-- Card Image -->
+            <ImageView
+                android:id="@+id/ivCardImage"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:src="@drawable/cardbackground_world"
+                app:layout_constraintWidth_percent="0.9"
+                app:layout_constraintDimensionRatio="2:1"
+                android:contentDescription="Card Image"
+                android:layout_marginBottom="16dp" />
 
-    <!-- Name on Card -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilNameOnCard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvNameOnCardLabel"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp">
+            <!-- Card Number Label -->
+            <TextView
+                android:id="@+id/tvCardNumberLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Card Number"
+                android:textSize="16sp"
+                android:textColor="#FBF7F7"
+                android:layout_marginBottom="8dp" />
 
-        <EditText
-            android:id="@+id/etNameOnCard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter Name"
-            android:background="#cccccc" />
-    </com.google.android.material.textfield.TextInputLayout>
+            <!-- Card Number Input -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilCardNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    <!-- Expiry Date and CVV Labels -->
-    <TextView
-        android:id="@+id/tvExpiryCVVLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Expiry Date and CVV"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/tilNameOnCard"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+                <EditText
+                    android:id="@+id/etCardNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Card Number"
+                    android:inputType="number"
+                    android:textColor="#FBF7F7"
+                    android:background="#cccccc" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Expiry Date and CVV -->
-    <LinearLayout
-        android:id="@+id/llExpiryCVV"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/tvExpiryCVVLabel"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="8dp">
+            <!-- Card Type Image -->
+            <ImageView
+                android:id="@+id/ivCardType"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="Card Type" />
 
-        <!-- Expiry Date -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginEnd="8dp">
+            <!-- Name on Card Label -->
+            <TextView
+                android:id="@+id/tvNameOnCardLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name on Card"
+                android:textSize="16sp"
+                android:textColor="#FBF7F7"
+                android:layout_marginTop="16dp" />
 
-            <EditText
-                android:id="@+id/etExpiry"
+            <!-- Name on Card Input -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilNameOnCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/etNameOnCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Name"
+                    android:textColor="#FBF7F7"
+                    android:background="#cccccc" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Expiry Date and CVV Label -->
+            <TextView
+                android:id="@+id/tvExpiryCVVLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Expiry Date and CVV"
+                android:textSize="16sp"
+                android:textColor="#FBF7F7"
+                android:layout_marginTop="16dp" />
+
+            <!-- Expiry Date and CVV Inputs -->
+            <LinearLayout
+                android:id="@+id/llExpiryCVV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="MM/YY"
-                android:background="#cccccc" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
 
-        <!-- CVV -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
+                <!-- Expiry Date Input -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp">
 
-            <EditText
-                android:id="@+id/etCVV"
-                android:layout_width="match_parent"
+                    <EditText
+                        android:id="@+id/etExpiry"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="MM/YY"
+                        android:textColor="#FBF7F7"
+                        android:background="#cccccc" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- CVV Input -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <EditText
+                        android:id="@+id/etCVV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="CVV"
+                        android:textColor="#FBF7F7"
+                        android:background="#cccccc" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <!-- Save Card Checkbox -->
+            <CheckBox
+                android:id="@+id/cbSaveCard"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="CVV"
-                android:background="#cccccc" />
-        </com.google.android.material.textfield.TextInputLayout>
-    </LinearLayout>
+                android:text="Save card for future payments"
+                android:textColor="#FBF7F7"
+                android:layout_marginTop="16dp" />
 
-    <!-- Save Card Checkbox -->
-    <CheckBox
-        android:id="@+id/cbSaveCard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Save card for future payments"
-        app:layout_constraintTop_toBottomOf="@id/llExpiryCVV"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp" />
+            <!-- Pay Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/pay"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:backgroundTint="#CC5500"
+                android:text="Pay"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="16dp"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
-    <!-- Pay Button -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/pay"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:backgroundTint="#800000"
-        android:text="Pay"
-        app:iconGravity="textStart"
-        app:iconSize="24dp"
-        app:iconTint="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/cbSaveCard"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

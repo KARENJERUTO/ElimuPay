@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#0A220F"
     tools:context=".ui.home.HomeFragment">
 
     <TextView
@@ -12,7 +13,7 @@
         android:layout_height="wrap_content"
         android:text=""
         android:textSize="20dp"
-        android:textColor="#800000"
+        android:textColor="#0A220F"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -24,7 +25,7 @@
         android:layout_height="wrap_content"
         android:text="Dashboard"
         android:textSize="35dp"
-        android:textColor="#800000"
+        android:textColor="#FFFFFF"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/textViewWelcome"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +39,7 @@
         android:drawableLeft="@drawable/baseline_circle_notifications_24"
         android:drawablePadding="8dp"
         android:textSize="18sp"
-        android:textColor="#800000"
+        android:textColor="#FFFFFF"
         android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@+id/textViewDashboard"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +51,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="16dp"
-        android:background="#800000"
+        android:background="#FFFFFF"
         app:layout_constraintTop_toBottomOf="@+id/textViewNotifications"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -65,7 +66,7 @@
             android:clickable="true"
             android:focusable="true"
             android:foreground="?attr/selectableItemBackground"
-            android:backgroundTint="#CCCCCC">
+            android:backgroundTint="#CC5500">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -80,7 +81,7 @@
                     android:drawableLeft="@drawable/student_icon"
                     android:layout_marginTop="8dp"
                     android:textSize="30sp"
-                    android:textColor="#800000"
+                    android:textColor="#0A220F"
                     android:textStyle="bold" />
 
             </RelativeLayout>
@@ -97,7 +98,7 @@
             android:clickable="true"
             android:focusable="true"
             android:foreground="?attr/selectableItemBackground"
-            android:backgroundTint="#CCCCCC">
+            android:backgroundTint="#CC5500">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -112,7 +113,7 @@
                     android:drawableLeft="@drawable/reports"
                     android:drawablePadding="10dp"
                     android:textSize="30sp"
-                    android:textColor="#800000"
+                    android:textColor="#0A220F"
                     android:textStyle="bold" />
 
             </RelativeLayout>
@@ -129,7 +130,7 @@
             android:clickable="true"
             android:focusable="true"
             android:foreground="?attr/selectableItemBackground"
-            android:backgroundTint="#CCCCCC">
+            android:backgroundTint="#CC5500">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -144,7 +145,7 @@
                     android:drawableLeft="@drawable/feestatements"
                     android:drawablePadding="8dp"
                     android:textSize="30sp"
-                    android:textColor="#800000"
+                    android:textColor="#0A220F"
                     android:textStyle="bold" />
 
             </RelativeLayout>

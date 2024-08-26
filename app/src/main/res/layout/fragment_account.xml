@@ -82,6 +82,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Save"
+                    android:backgroundTint="#0A220F"
                     android:layout_gravity="end"
                     android:layout_marginTop="16dp" />
 
@@ -152,6 +153,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Add Payment Method"
+                    android:backgroundTint="#0A220F"
                     android:layout_marginTop="8dp"
                     android:layout_gravity="end" />
 
@@ -191,6 +193,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Change"
+                    android:backgroundTint="#0A220F"
                     android:layout_gravity="end" />
 
                 <!-- Two-Factor Authentication -->
@@ -204,6 +207,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Enable"
+                    android:backgroundTint="#0A220F"
                     android:layout_gravity="end" />
 
             </LinearLayout>
@@ -242,6 +246,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="View"
+                    android:backgroundTint="#0A220F"
                     android:layout_gravity="end" />
 
                 <!-- Contact Information -->
@@ -255,6 +260,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="View"
+                    android:backgroundTint="#0A220F"
                     android:layout_gravity="end" />
 
                 <!-- Support Tickets -->
@@ -268,6 +274,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="View"
+                    android:backgroundTint="#0A220F"
                     android:layout_gravity="end" />
 
             </LinearLayout>
@@ -278,7 +285,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Logout"
-            android:backgroundTint="#800000"
+            android:backgroundTint="#0A220F"
             android:textColor="@android:color/white"
             android:layout_marginTop="16dp" />
 
