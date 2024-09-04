@@ -22,7 +22,7 @@
                 android:textStyle="bold"
                 android:padding="5dp"
                 android:backgroundTint="#cccccc"
-                android:textColor="#800000"
+                android:textColor="#1F3A93"
                 android:background="@drawable/cell_border" />
 
             <TextView

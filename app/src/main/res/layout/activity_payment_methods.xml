@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/paymentmethods"
-    android:background="#0A220F"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F5F5F5"
     tools:context=".paymentmethods.PaymentMethods">
 
     <TextView
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:text="Payment Methods"
         android:textSize="20sp"
-        android:textColor="#FFFFFF"
+        android:textColor="#003366"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +28,7 @@
         android:id="@+id/containerCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="#e0e0e0"
+        app:cardBackgroundColor="#E3F2FD"
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +44,7 @@
                 android:id="@+id/cardMpesa"
                 android:layout_width="200dp"
                 android:layout_height="60dp"
-                app:cardBackgroundColor="#cccccc"
+                app:cardBackgroundColor="#F0F4F8"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +66,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="M-Pesa"
-                    android:textColor="#800000"
+                    android:textColor="#003366"
                     android:textSize="16sp" />
 
             </androidx.cardview.widget.CardView>
@@ -75,7 +75,7 @@
                 android:id="@+id/cardCard"
                 android:layout_width="200dp"
                 android:layout_height="60dp"
-                app:cardBackgroundColor="#cccccc"
+                app:cardBackgroundColor="#F0F4F8"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -98,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="Credit\n Debit"
-                    android:textColor="#800000"
+                    android:textColor="#003366"
                     android:textSize="16sp" />
 
             </androidx.cardview.widget.CardView>
@@ -107,7 +107,7 @@
                 android:id="@+id/cardECitizen"
                 android:layout_width="200dp"
                 android:layout_height="60dp"
-                app:cardBackgroundColor="#cccccc"
+                app:cardBackgroundColor="#F0F4F8"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -128,7 +128,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="eCitizen"
-                    android:textColor="#800000"
+                    android:textColor="#003366"
                     android:textSize="16sp" />
 
             </androidx.cardview.widget.CardView>
@@ -137,7 +137,7 @@
                 android:id="@+id/cardBankAccount"
                 android:layout_width="200dp"
                 android:layout_height="60dp"
-                app:cardBackgroundColor="#cccccc"
+                app:cardBackgroundColor="#F0F4F8"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -159,7 +159,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="Bank Account"
-                    android:textColor="#800000"
+                    android:textColor="#003366"
                     android:textSize="16sp"
                     tools:ignore="HardcodedText" />
 
@@ -170,7 +170,7 @@
                 android:id="@+id/cardLipaMdogoMdogo"
                 android:layout_width="200dp"
                 android:layout_height="60dp"
-                app:cardBackgroundColor="#cccccc"
+                app:cardBackgroundColor="#F0F4F8"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -191,7 +191,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="Lipa Mdogo Mdogo"
-                    android:textColor="#800000"
+                    android:textColor="#003366"
                     android:textSize="16sp"
                     tools:ignore="HardcodedText" />
 

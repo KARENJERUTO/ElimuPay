@@ -5,57 +5,67 @@
     android:id="@+id/eCitizenPaymentActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0A220F"
     tools:context=".paymentmethods.eCitizenPaymentActivity">
 
-    <!-- "Pay Fees" TextView -->
-    <TextView
-        android:id="@+id/textViewPayFees"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pay Fees"
-        android:textSize="24sp"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
-
-    <!-- eCitizen Logo ImageView -->
-    <ImageView
-        android:id="@+id/imageViewECitizenLogo"
-        android:layout_width="250dp"
-        android:layout_height="100dp"
-        app:srcCompat="@drawable/ecitizen"
-        app:layout_constraintTop_toBottomOf="@+id/textViewPayFees"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
-
-    <!-- CardView containing the Pay Button -->
+    <!-- Outer CardView wrapping the entire content -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardViewPayButton"
+        android:id="@+id/cardViewOuter"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewECitizenLogo"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cardBackgroundColor="#FFFFFF">
 
-        <!-- Pay Button -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonPay"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="Pay"
-            android:clickable="true"
-            android:onClick="onPayClicked"
-            android:backgroundTint="#CC5500" />
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <!-- "Pay Fees" TextView -->
+            <TextView
+                android:id="@+id/textViewPayFees"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pay Fees"
+                android:textSize="24sp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp" />
+
+            <!-- eCitizen Logo ImageView -->
+            <ImageView
+                android:id="@+id/imageViewECitizenLogo"
+                android:layout_width="250dp"
+                android:layout_height="100dp"
+                app:srcCompat="@drawable/ecitizen"
+                app:layout_constraintTop_toBottomOf="@+id/textViewPayFees"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp" />
+
+            <!-- Pay Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonPay"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:text="Pay"
+                android:clickable="true"
+                android:onClick="onPayClicked"
+                android:backgroundTint="#28A745"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewECitizenLogo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 

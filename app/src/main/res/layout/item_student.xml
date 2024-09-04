@@ -6,7 +6,7 @@
     android:layout_margin="16dp"
     app:cardCornerRadius="16dp"
     app:cardElevation="8dp"
-    app:cardBackgroundColor="#0A220F">
+    app:cardBackgroundColor="#F0F4F8">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="First Name: "
-            android:textColor="@color/white"
+            android:textColor="#1F3A93"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Last Name: "
-            android:textColor="@color/white"
+            android:textColor="#1F3A93"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Balance: "
-            android:textColor="@color/white"
+            android:textColor="#1F3A93"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -51,7 +51,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:text="Pay Fee"
-            android:backgroundTint="#CC5500"
+            android:backgroundTint="#008080"
             app:iconGravity="textStart"
             app:iconSize="24dp"
             app:iconTint="@color/white"

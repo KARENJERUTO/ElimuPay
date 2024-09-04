@@ -2,12 +2,12 @@
     <!-- Base application theme. -->
     <style name="Theme.ElimuPay" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#800000</item>
-        <item name="colorPrimaryVariant">#800000</item>
+        <item name="colorPrimary">#1F3A93</item>
+        <item name="colorPrimaryVariant">#1F3A93</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">#800000</item>
-        <item name="colorSecondaryVariant">#800000</item>
+        <item name="colorSecondary">#008080</item>
+        <item name="colorSecondaryVariant">#00A6FB</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>

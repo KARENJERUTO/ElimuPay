@@ -56,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
             val progressBar: ProgressBar = findViewById(R.id.progressBar)
             progressBar.visibility = View.VISIBLE
 
-            val url = "http://192.168.1.105:8003/api/v1/parents/parents/login/"
+            val url = "http://192.168.90.244:8007/api/v1/parents/parents/login/"
             val json = JSONObject().apply {
                 put("username", username)
                 put("password", password)
@@ -135,4 +135,8 @@ class LoginActivity : AppCompatActivity() {
                 }
             })
         }
+    fun onForgotPasswordClicked(view: View) {
+        val intent = Intent(this, ResetPassword::class.java)
+        startActivity(intent)
     }
+}

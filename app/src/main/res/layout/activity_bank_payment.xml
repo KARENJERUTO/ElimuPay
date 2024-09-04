@@ -6,10 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="#0A220F"
     android:id="@+id/BankPaymentActivity"
     tools:context=".paymentmethods.BankPaymentActivity">
 
+    <!-- Bank Logo -->
     <ImageView
         android:id="@+id/iconImageView"
         android:layout_width="250dp"
@@ -20,28 +20,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <TextView
-        android:id="@+id/titleTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Pay with Equity"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="#FFFFFF"
-        app:layout_constraintTop_toBottomOf="@id/iconImageView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
-
-    <!-- CardView -->
+    <!-- CardView Container -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        app:layout_constraintTop_toBottomOf="@id/titleTextView"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="6dp"
+        app:cardBackgroundColor="#E1E5E8"
+        app:layout_constraintTop_toBottomOf="@id/iconImageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -57,7 +47,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Select Account">
+                android:hint="Select Account"
+                android:textColorHint="#000000">
 
                 <com.google.android.material.textfield.MaterialAutoCompleteTextView
                     android:id="@+id/accountSelectionAutoComplete"
@@ -74,10 +65,11 @@
             <!-- Pay Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/payButton"
-                android:backgroundTint="#CC5500"
+                android:backgroundTint="#800000"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:text="Pay"
+                android:textColor="@android:color/white"
                 android:layout_marginTop="16dp"/>
 
         </LinearLayout>

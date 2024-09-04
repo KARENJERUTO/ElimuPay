@@ -30,7 +30,7 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        viewBalanceTextView = binding.textViewBalance
+        viewBalanceTextView = binding.textViewStudents
         welcomeTextView = binding.textViewWelcome
 
         // Set the welcome message
