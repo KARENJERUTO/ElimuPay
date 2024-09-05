@@ -42,7 +42,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Notifications"
-        android:drawableLeft="@drawable/baseline_circle_notifications_24"
         android:drawablePadding="8dp"
         android:textSize="18sp"
         android:textColor="#FFD700"
@@ -60,7 +59,6 @@
         android:layout_marginHorizontal="16dp"
         app:cardCornerRadius="16dp"
         app:cardElevation="8dp"
-        android:backgroundTint="#F5F5F5"
         app:layout_constraintTop_toBottomOf="@+id/textViewNotifications"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -104,9 +102,8 @@
                         android:layout_height="48dp"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/student_icon"
-                        android:tint="#008080"
-                        tools:ignore="UseAppTint" />
+                        android:src="@android:drawable/ic_menu_info_details"
+                        app:tint="#008080" />
 
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
@@ -144,7 +141,7 @@
                         android:layout_height="48dp"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/reports"
+                        android:src="@android:drawable/ic_menu_report_image"
                         app:tint="#FFD700" />
 
                 </RelativeLayout>
@@ -183,7 +180,7 @@
                         android:layout_height="48dp"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/feestatements"
+                        android:src="@android:drawable/ic_menu_agenda"
                         app:tint="#008080" />
 
                 </RelativeLayout>
@@ -204,4 +201,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:indeterminateTint="#FFD700" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
