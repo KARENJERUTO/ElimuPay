@@ -33,7 +33,7 @@ class HomeFragment : Fragment() {
         welcomeTextView = binding.textViewWelcome
 
         // Simulate saving the username to SharedPreferences
-        saveUserName("John Doe") // Replace "John Doe" with the actual user name or dynamic value
+        saveUserName("") // Replace "John Doe" with the actual user name or dynamic value
 
         // Retrieve the username from SharedPreferences
         val sharedPref = activity?.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
@@ -65,7 +65,7 @@ class HomeFragment : Fragment() {
 
     private fun fetchPaidFees(): String {
         // Simulate fetching paid fees from a data source
-        return "Term 1: Sh500\nTerm 2: Sh400"
+        return "Term 1: Sh500\nTerm 2: Sh 400"
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -79,6 +79,7 @@
 
                 <!-- Save Button -->
                 <Button
+                    android:id="@+id/btnSave"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Save"
@@ -104,6 +105,7 @@
                 android:padding="16dp">
 
                 <TextView
+                    android:id="@+id/textViewFeePaid"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Payment History"
@@ -144,12 +146,14 @@
 
                 <!-- Placeholder for payment methods list -->
                 <TextView
+                    android:id="@+id/paymentMethodsList"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Manage your payment methods here." />
 
                 <!-- Add Payment Method Button -->
                 <Button
+                    android:id="@+id/btnPaymentMethods"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Add Payment Method"
@@ -204,6 +208,7 @@
                     android:layout_marginTop="8dp" />
 
                 <Button
+                    android:id="@+id/btnSecuritySettings"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Enable"
@@ -243,6 +248,7 @@
                     android:layout_marginTop="8dp" />
 
                 <Button
+                    android:id="@+id/btnFAQs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="View"
@@ -257,6 +263,7 @@
                     android:layout_marginTop="8dp" />
 
                 <Button
+                    android:id="@+id/btnContact"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="View"
@@ -271,6 +278,7 @@
                     android:layout_marginTop="8dp" />
 
                 <Button
+                    android:id="@+id/btnSupport"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="View"
@@ -282,6 +290,7 @@
 
         <!-- Logout Section -->
         <Button
+            android:id="@+id/btnLogout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Logout"
