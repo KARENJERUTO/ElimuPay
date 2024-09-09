@@ -3,16 +3,31 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="16dp"
+    android:background="@color/white">
+
+    <!-- Fee Statement Title -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fee Structure"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:paddingBottom="16dp" />
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:stretchColumns="1"
+        android:shrinkColumns="1">
 
         <!-- Header Row -->
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="#F0F4F8">
 
             <TextView
                 android:layout_width="0dp"
@@ -20,10 +35,10 @@
                 android:layout_weight="1"
                 android:text="ID"
                 android:textStyle="bold"
-                android:padding="5dp"
-                android:backgroundTint="#cccccc"
-                android:textColor="#1F3A93"
-                android:background="@drawable/cell_border" />
+                android:textColor="@color/black"
+                android:padding="8dp"
+                android:gravity="center"
+                android:background="@drawable/cell_border_fee" />
 
             <TextView
                 android:layout_width="0dp"
@@ -31,8 +46,10 @@
                 android:layout_weight="2"
                 android:text="Category"
                 android:textStyle="bold"
-                android:padding="5dp"
-                android:background="@drawable/cell_border" />
+                android:textColor="@color/black"
+                android:padding="8dp"
+                android:gravity="center"
+                android:background="@drawable/cell_border_fee" />
 
             <TextView
                 android:layout_width="0dp"
@@ -40,11 +57,13 @@
                 android:layout_weight="1"
                 android:text="Amount"
                 android:textStyle="bold"
-                android:padding="5dp"
-                android:background="@drawable/cell_border" />
+                android:textColor="@color/black"
+                android:padding="8dp"
+                android:gravity="center"
+                android:background="@drawable/cell_border_fee" />
         </TableRow>
 
-        <!-- Data Rows -->
+        <!-- Sample Data Row -->
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -54,31 +73,65 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="ID"
-                android:padding="5dp"
+                android:text="001"
                 android:textColor="@color/black"
-                android:backgroundTint="#cccccc"
-                android:background="@drawable/cell_border" />
+                android:padding="8dp"
+                android:gravity="center"
+                android:background="@drawable/cell_border_fee" />
 
             <TextView
                 android:id="@+id/category_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:text="Category"
-                android:padding="5dp"
-                android:background="@drawable/cell_border" />
+                android:text="Tuition Fees"
+                android:textColor="@color/black"
+                android:padding="8dp"
+                android:gravity="center"
+                android:background="@drawable/cell_border_fee" />
 
             <TextView
                 android:id="@+id/amount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Amount"
-                android:padding="5dp"
-                android:background="@drawable/cell_border" />
+                android:text="Sh1000"
+                android:textColor="@color/black"
+                android:padding="8dp"
+                android:gravity="center"
+                android:background="@drawable/cell_border_fee" />
         </TableRow>
 
+        <!-- Additional Rows can be added dynamically in the code -->
+
     </TableLayout>
+
+    <!-- Total Amount Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="16dp"
+        android:gravity="end">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total:"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:padding="8dp"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/total_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sh1000"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:padding="8dp"
+            android:textSize="16sp" />
+    </LinearLayout>
 
 </LinearLayout>

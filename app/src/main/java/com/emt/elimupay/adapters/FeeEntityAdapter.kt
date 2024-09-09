@@ -28,8 +28,8 @@ class FeeEntityAdapter(private val feeEntities: List<FeeEntity>) :
     }
 
     inner class FeeEntityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val textFirstName: TextView = itemView.findViewById(R.id.textFirstName)
-        private val textMiddleName: TextView = itemView.findViewById(R.id.textMiddleName)
+        private val textStudentName: TextView = itemView.findViewById(R.id.textStudentName)
+        private val textStudentID: TextView = itemView.findViewById(R.id.textStudentID)
         private val textDescription: TextView = itemView.findViewById(R.id.textDescription)
         private val textDebit: TextView = itemView.findViewById(R.id.textDebit)
         private val textCredit: TextView = itemView.findViewById(R.id.textCredit)
@@ -37,8 +37,8 @@ class FeeEntityAdapter(private val feeEntities: List<FeeEntity>) :
         private val textTransactionDate: TextView = itemView.findViewById(R.id.textTransactionDate)
 
         fun bind(feeEntity: FeeEntity) {
-            textFirstName.text = feeEntity.firstName
-            textMiddleName.text = feeEntity.middleName
+            textStudentName.text = "${feeEntity.firstName} ${feeEntity.middleName}"
+            textStudentID.text = feeEntity.student_id.toString()
             textDescription.text = feeEntity.description
             textDebit.text = feeEntity.debit.toString()
             textCredit.text = feeEntity.credit.toString()

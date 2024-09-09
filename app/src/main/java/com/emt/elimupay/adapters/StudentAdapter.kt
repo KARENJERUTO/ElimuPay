@@ -15,9 +15,9 @@ import com.google.android.material.button.MaterialButton
 class StudentAdapter(private var students: List<Student>) : RecyclerView.Adapter<StudentAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val firstNameTextView: TextView = itemView.findViewById(R.id.textViewFirstName)
-        val lastNameTextView: TextView = itemView.findViewById(R.id.textViewLastName)
-        val balanceTextView: TextView = itemView.findViewById(R.id.textViewBalance)
+        val firstNameTextView: TextView = itemView.findViewById(R.id.FirstName)
+        val lastNameTextView: TextView = itemView.findViewById(R.id.LastName)
+        val balanceTextView: TextView = itemView.findViewById(R.id.Balance)
         val payFeeButton: MaterialButton = itemView.findViewById(R.id.buttonPayFee) // Assuming buttonPayFee exists in item_student.xml
 
         init {

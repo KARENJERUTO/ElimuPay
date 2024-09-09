@@ -42,12 +42,12 @@ class HomeFragment : Fragment() {
         // Set the welcome message with the retrieved user name
         welcomeTextView.text = "Welcome, $userName!"
 
-        binding.cardview1.setOnClickListener {
+        binding.buttonStudents.setOnClickListener {
             val intent = Intent(activity, DashboardActivity::class.java)
             startActivity(intent)
         }
 
-        binding.cardviewFeeStructure.setOnClickListener {
+        binding.buttonFeeStructure.setOnClickListener {
             val intent = Intent(activity, FeeStructureActivity::class.java)
             startActivity(intent)
         }
@@ -74,11 +74,11 @@ class HomeFragment : Fragment() {
         val paidFees = fetchPaidFees()
 
         // Add click listener to textViewNotifications
-        binding.textViewNotifications.setOnClickListener {
+        binding.imageViewNotificationIcon.setOnClickListener {
             showNotificationsDialog(paidFees)
         }
 
-        binding.cardview2.setOnClickListener {
+        binding.buttonFeeStatement.setOnClickListener {
             Log.d("HomeFragment", "Fee statement clicked")
             val intent = Intent(activity, FeesStatementsActivity::class.java)
             startActivity(intent)
