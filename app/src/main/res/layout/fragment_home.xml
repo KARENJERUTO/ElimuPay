@@ -90,7 +90,7 @@
                     android:text="View"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:backgroundTint="#008080"
+                    android:backgroundTint="#FFD700"
                     android:textColor="#FFFFFF" />
 
             </RelativeLayout>
@@ -166,7 +166,7 @@
                     android:text="View"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:backgroundTint="#008080"
+                    android:backgroundTint="#FFD700"
                     android:textColor="#FFFFFF" />
 
             </RelativeLayout>

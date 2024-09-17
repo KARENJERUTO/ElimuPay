@@ -33,7 +33,7 @@ class HomeFragment : Fragment() {
         welcomeTextView = binding.textViewWelcome
 
         // Simulate saving the username to SharedPreferences
-        saveUserName("") // Replace "John Doe" with the actual user name or dynamic value
+        saveUserName("John") // Replace "John Doe" with the actual user name or dynamic value
 
         // Retrieve the username from SharedPreferences
         val sharedPref = activity?.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)

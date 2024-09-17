@@ -12,6 +12,7 @@ class FeeEntityAdapter(private val feeEntities: List<FeeEntity>) :
     fun getFeeEntities(): List<FeeEntity> {
         return feeEntities
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeeEntityViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.fee_entity, parent, false)

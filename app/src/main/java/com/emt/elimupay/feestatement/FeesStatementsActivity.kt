@@ -1,7 +1,7 @@
 package com.emt.elimupay.feestatement
 
 import FeeEntityAdapter
-import android.content.Intent // Import Intent from android.content
+import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
@@ -20,8 +20,6 @@ import org.json.JSONArray
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-
-
 
 class FeesStatementsActivity : AppCompatActivity() {
 
@@ -74,7 +72,7 @@ class FeesStatementsActivity : AppCompatActivity() {
             val client = OkHttpClient()
 
             try {
-                val url = "http://192.168.1.105:8003/api/v1/fee/api/v1/fee/get_transactions_for_student/3/"
+                val url = "http://192.168.88.86:8007/api/v1/fee/api/v1/fee/get_transactions_for_student/1/"
                 val request = Request.Builder().url(url).build()
                 val response = client.newCall(request).execute()
 

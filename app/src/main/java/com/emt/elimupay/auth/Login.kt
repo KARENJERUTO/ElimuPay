@@ -7,10 +7,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.emt.elimupay.mainapp.MainActivity
 import com.emt.elimupay.R
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -25,33 +22,10 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_login)
-
-        // Check if user is already logged in
-        checkLoginStatus()
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
     }
 
-    // Check if user is already logged in
-    private fun checkLoginStatus() {
-        val sharedPref = getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE)
-        val isLoggedIn = sharedPref.getBoolean("isLoggedIn", false)
-
-        if (isLoggedIn) {
-            // User is already logged in, navigate to MainActivity
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-    }
-
-    // Handle the login process
+    // Handle login process
     fun handleLogin(view: View) {
         val usernameEditText = findViewById<EditText>(R.id.username)
         val passwordEditText = findViewById<EditText>(R.id.password)
@@ -59,19 +33,15 @@ class LoginActivity : AppCompatActivity() {
         val password = passwordEditText.text.toString().trim()
 
         if (username.isEmpty() || password.isEmpty()) {
-            if (username.isEmpty()) {
-                usernameEditText.error = "Please enter your username"
-            }
-            if (password.isEmpty()) {
-                passwordEditText.error = "Please enter your password"
-            }
+            if (username.isEmpty()) usernameEditText.error = "Please enter your username"
+            if (password.isEmpty()) passwordEditText.error = "Please enter your password"
             return
         }
 
         val progressBar: ProgressBar = findViewById(R.id.progressBar)
         progressBar.visibility = View.VISIBLE
 
-        val url = "http://192.168.90.244:8007/api/v1/parents/parents/login/"
+        val url = "http://192.168.88.86:8007/api/v1/parents/parents/login/"
         val json = JSONObject().apply {
             put("username", username)
             put("password", password)
@@ -93,11 +63,7 @@ class LoginActivity : AppCompatActivity() {
             override fun onFailure(call: okhttp3.Call, e: IOException) {
                 runOnUiThread {
                     progressBar.visibility = View.GONE
-                    Toast.makeText(
-                        this@LoginActivity,
-                        "Login failed: ${e.message}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(this@LoginActivity, "Login failed: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -114,40 +80,24 @@ class LoginActivity : AppCompatActivity() {
                                 // Save login info in SharedPreferences
                                 saveLoginInfo(username)
 
-                                Toast.makeText(
-                                    this@LoginActivity,
-                                    "Login successful!",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                Toast.makeText(this@LoginActivity, "Login successful!", Toast.LENGTH_SHORT).show()
                                 val intent = Intent(this@LoginActivity, MainActivity::class.java)
                                 startActivity(intent)
                                 finish()
                             } else {
-                                Toast.makeText(
-                                    this@LoginActivity,
-                                    "Login failed: $message",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                Toast.makeText(this@LoginActivity, "Login failed: $message", Toast.LENGTH_SHORT).show()
                             }
                         }
                     } catch (e: JSONException) {
                         runOnUiThread {
                             progressBar.visibility = View.GONE
-                            Toast.makeText(
-                                this@LoginActivity,
-                                "Login failed: Error parsing response",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            Toast.makeText(this@LoginActivity, "Login failed: Error parsing response", Toast.LENGTH_SHORT).show()
                         }
                     }
                 } else {
                     runOnUiThread {
                         progressBar.visibility = View.GONE
-                        Toast.makeText(
-                            this@LoginActivity,
-                            "Login failed: Empty response",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(this@LoginActivity, "Login failed: Empty response", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -161,10 +111,5 @@ class LoginActivity : AppCompatActivity() {
         editor.putString("username", username)
         editor.putBoolean("isLoggedIn", true) // Mark the user as logged in
         editor.apply()
-    }
-
-    fun onForgotPasswordClicked(view: View) {
-        val intent = Intent(this, ResetPassword::class.java)
-        startActivity(intent)
     }
 }

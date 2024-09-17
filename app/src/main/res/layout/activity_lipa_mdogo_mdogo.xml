@@ -78,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:text="Submit Payment"
                     android:textColor="#FFFFFF"
-                    android:backgroundTint="#003366"
+                    android:backgroundTint="#28A745"
                     android:layout_marginTop="16dp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>

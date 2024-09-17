@@ -6,7 +6,20 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F5F5F5"
     tools:context=".paymentmethods.CardPaymentActivity">
+
+    <!-- ImageView on top -->
+    <ImageView
+        android:id="@+id/imageTop"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:src="@drawable/visa"
+    android:scaleType="centerCrop"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:contentDescription="Payment Image"/>
 
     <!-- CardView containing the TextViews, EditTexts, and Button -->
     <androidx.cardview.widget.CardView
@@ -14,100 +27,60 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="6dp"
-        app:cardBackgroundColor="#009688"
-        app:layout_constraintTop_toTopOf="parent"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp"
+        app:cardBackgroundColor="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@id/imageTop"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
-
-
-            <!-- Card Image -->
-            <ImageView
-                android:id="@+id/ivCardImage"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:src="@drawable/cardbackground_world"
-                app:layout_constraintWidth_percent="0.9"
-                app:layout_constraintDimensionRatio="2:1"
-                android:contentDescription="Card Image"
-                android:layout_marginBottom="16dp" />
-
-            <!-- Card Number Label -->
-            <TextView
-                android:id="@+id/tvCardNumberLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Card Number"
-                android:textSize="16sp"
-                android:textColor="#FBF7F7"
-                android:layout_marginBottom="8dp" />
+            android:padding="24dp">
 
             <!-- Card Number Input -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilCardNumber"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="#1F3A93">
 
                 <EditText
                     android:id="@+id/etCardNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="#FFFFFF"
                     android:hint="Card Number"
                     android:inputType="number"
-                    android:textColor="#FBF7F7"
-                    android:background="#cccccc" />
+                    android:padding="12dp"
+                    android:textColor="#000000"
+                    tools:ignore="TouchTargetSizeCheck" />
             </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- Card Type Image -->
-            <ImageView
-                android:id="@+id/ivCardType"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginTop="8dp"
-                android:contentDescription="Card Type" />
-
-            <!-- Name on Card Label -->
-            <TextView
-                android:id="@+id/tvNameOnCardLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Name on Card"
-                android:textSize="16sp"
-                android:textColor="#FBF7F7"
-                android:layout_marginTop="16dp" />
 
             <!-- Name on Card Input -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilNameOnCard"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="#1F3A93"
+                android:layout_marginTop="16dp">
 
                 <EditText
                     android:id="@+id/etNameOnCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Name"
-                    android:textColor="#FBF7F7"
-                    android:background="#cccccc" />
+                    android:backgroundTint="#FFFFFF"
+                    android:hint="Name on card"
+                    android:padding="12dp"
+                    android:textColor="#000000"
+                    tools:ignore="TouchTargetSizeCheck" />
             </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- Expiry Date and CVV Label -->
-            <TextView
-                android:id="@+id/tvExpiryCVVLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Expiry Date and CVV"
-                android:textSize="16sp"
-                android:textColor="#FBF7F7"
-                android:layout_marginTop="16dp" />
 
             <!-- Expiry Date and CVV Inputs -->
             <LinearLayout
@@ -115,37 +88,48 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="16dp">
 
                 <!-- Expiry Date Input -->
                 <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginEnd="8dp">
+                    android:layout_marginEnd="8dp"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="#1F3A93">
 
                     <EditText
                         android:id="@+id/etExpiry"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:backgroundTint="#FFFFFF"
                         android:hint="MM/YY"
-                        android:textColor="#FBF7F7"
-                        android:background="#cccccc" />
+                        android:padding="12dp"
+                        android:textColor="#000000"
+                        tools:ignore="TouchTargetSizeCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- CVV Input -->
                 <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="#1F3A93">
 
                     <EditText
                         android:id="@+id/etCVV"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:backgroundTint="#FFFFFF"
                         android:hint="CVV"
-                        android:textColor="#FBF7F7"
-                        android:background="#cccccc" />
+                        android:inputType="numberPassword"
+                        android:padding="12dp"
+                        android:textColor="#000000"
+                        tools:ignore="TouchTargetSizeCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
@@ -155,18 +139,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Save card for future payments"
-                android:textColor="#FBF7F7"
-                android:layout_marginTop="16dp" />
+                android:textColor="#000000"
+                android:layout_marginTop="16dp"/>
 
             <!-- Pay Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/pay"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:backgroundTint="#00BCD4"
+                android:backgroundTint="#1F3A93"
                 android:text="Pay"
                 android:textColor="#FFFFFF"
-                android:layout_marginTop="16dp"/>
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp"
+                app:iconPadding="12dp"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

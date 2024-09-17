@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp"
+        android:padding="16dp"
         android:background="#F7F9FC">
 
         <!-- Title -->
@@ -33,39 +33,6 @@
             android:stretchColumns="1"
             android:layout_marginBottom="16dp">
 
-            <!-- Header Row -->
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="First Name"
-                    android:textColor="#1F3A93"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:padding="8dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Last Name"
-                    android:textColor="#1F3A93"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:padding="8dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Balance"
-                    android:textColor="#1F3A93"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:padding="8dp" />
-            </TableRow>
-
             <!-- Data Row -->
             <TableRow
                 android:layout_width="wrap_content"
@@ -73,27 +40,30 @@
 
                 <TextView
                     android:id="@+id/FirstName"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="John"
+                    android:layout_weight="1"
+                    android:text=""
                     android:textColor="#333333"
                     android:textSize="16sp"
                     android:padding="8dp" />
 
                 <TextView
                     android:id="@+id/LastName"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Doe"
+                    android:layout_weight="1"
+                    android:text=""
                     android:textColor="#333333"
                     android:textSize="16sp"
                     android:padding="8dp" />
 
                 <TextView
                     android:id="@+id/Balance"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Sh1,250.00"
+                    android:layout_weight="1"
+                    android:text=""
                     android:textColor="#FF3B30"
                     android:textSize="16sp"
                     android:padding="8dp" />
@@ -109,9 +79,8 @@
             android:text="Pay Fee"
             android:textColor="@android:color/white"
             android:textSize="18sp"
-            android:backgroundTint="#008080"
+            android:backgroundTint="#FFD700"
             app:cornerRadius="8dp"
-            android:iconTint="@android:color/white"
             android:padding="16dp"
             android:layout_marginTop="16dp" />
     </LinearLayout>
