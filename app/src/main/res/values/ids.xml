@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="tvStudentName" type="id" />
+    <item name="tvAdmNumber" type="id" />
+    <item name="tvGradeStream" type="id" />
+    <item name="tvUPINumber" type="id" />
+    <item name="tvHealthStatus" type="id" />
+</resources>

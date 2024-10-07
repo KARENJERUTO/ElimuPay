@@ -20,6 +20,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var viewBalanceTextView: TextView
     private lateinit var welcomeTextView: TextView
+    private lateinit var notificationCounterTextView: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,15 +32,14 @@ class HomeFragment : Fragment() {
 
         viewBalanceTextView = binding.textViewStudents
         welcomeTextView = binding.textViewWelcome
+        notificationCounterTextView = binding.notificationCounter
 
-        // Simulate saving the username to SharedPreferences
-        saveUserName("John") // Replace "John Doe" with the actual user name or dynamic value
+        // Set initial notification counter state
+        updateNotificationCounter()
 
         // Retrieve the username from SharedPreferences
         val sharedPref = activity?.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
         val userName = sharedPref?.getString("userName", "User") // Default is "User" if not found
-
-        // Set the welcome message with the retrieved user name
         welcomeTextView.text = "Welcome, $userName!"
 
         binding.buttonStudents.setOnClickListener {
@@ -55,27 +55,16 @@ class HomeFragment : Fragment() {
         return root
     }
 
-    private fun saveUserName(userName: String) {
-        val sharedPref = activity?.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
-        sharedPref?.edit()?.apply {
-            putString("userName", userName)
-            apply()
-        }
-    }
-
-    private fun fetchPaidFees(): String {
-        // Simulate fetching paid fees from a data source
-        return "Term 1: Sh500\nTerm 2: Sh 400"
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val paidFees = fetchPaidFees()
 
-        // Add click listener to textViewNotifications
+        // Add click listener to the notification icon
         binding.imageViewNotificationIcon.setOnClickListener {
             showNotificationsDialog(paidFees)
+            // Once notifications are read, mark them as read and update the counter
+            markNotificationsAsRead()
         }
 
         binding.buttonFeeStatement.setOnClickListener {
@@ -83,6 +72,26 @@ class HomeFragment : Fragment() {
             val intent = Intent(activity, FeesStatementsActivity::class.java)
             startActivity(intent)
         }
+
+        // Update the notification counter when paid fees change
+        updateNotificationCounter()
+    }
+
+    private fun fetchPaidFees(): String {
+        // Fetching paid fees logic
+        val fees = "Term 1: Sh15000" // Change this value as needed
+        // Logic to update the unread notifications count if fees change
+        if (fees.isNotEmpty()) {
+            // Update the unread notifications count in SharedPreferences
+            val sharedPref = activity?.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+            sharedPref?.edit()?.apply {
+                putInt("unreadNotifications", 1) // Set the unread notifications count to 1 if fees are updated
+                apply()
+            }
+            // Update the notification counter UI
+            updateNotificationCounter()
+        }
+        return fees
     }
 
     private fun showNotificationsDialog(paidFees: String) {
@@ -94,6 +103,32 @@ class HomeFragment : Fragment() {
         }
         val dialog = builder.create()
         dialog.show()
+    }
+
+    private fun markNotificationsAsRead() {
+        // Update SharedPreferences to mark notifications as read
+        val sharedPref = activity?.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+        sharedPref?.edit()?.apply {
+            putInt("unreadNotifications", 0) // Mark all notifications as read
+            apply()
+        }
+
+        // Update the notification counter immediately after marking as read
+        updateNotificationCounter()
+    }
+
+    private fun updateNotificationCounter() {
+        // Retrieve the unread notifications count from SharedPreferences
+        val sharedPref = activity?.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+        val unreadNotifications = sharedPref?.getInt("unreadNotifications", 0) // Default to 0 if not found
+
+        // Set the visibility and text of the notification counter based on unread notifications
+        if (unreadNotifications != null && unreadNotifications > 0) {
+            notificationCounterTextView.text = unreadNotifications.toString()
+            notificationCounterTextView.visibility = View.VISIBLE
+        } else {
+            notificationCounterTextView.visibility = View.GONE
+        }
     }
 
     override fun onDestroyView() {

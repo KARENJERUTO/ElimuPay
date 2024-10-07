@@ -31,7 +31,7 @@ class DashboardActivity : AppCompatActivity() {
         studentAdapter = StudentAdapter(emptyList())
         recyclerView.adapter = studentAdapter
 
-        val url = "http://192.168.88.86:8007/api/v1/studentsparents/students-by-parent/35000000/"
+        val url = "http://172.16.9.74:8001/api/v1/studentsparents/students-balance-by-parent/12345678/"
         FetchDataTask().execute(url)
 
     }

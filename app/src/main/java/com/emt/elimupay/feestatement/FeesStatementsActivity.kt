@@ -16,6 +16,7 @@ import com.emt.elimupay.R
 import com.emt.elimupay.models.FeeEntity
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.Response
 import org.json.JSONArray
 import java.io.File
 import java.io.FileOutputStream
@@ -33,10 +34,11 @@ class FeesStatementsActivity : AppCompatActivity() {
         recyclerViewTransactions = findViewById(R.id.recyclerViewTransactions)
         recyclerViewTransactions.layoutManager = LinearLayoutManager(this)
 
-        // Make the API call
+        // Make the API call to fetch fee transactions
         FetchFeeEntitiesTask().execute()
     }
 
+    // Method to handle downloading the fee statement as a PDF
     fun downloadFeeStatement(view: View) {
         if (::adapter.isInitialized) { // Check if adapter is initialized
             val pdfGenerator = PdfGenerator()
@@ -61,10 +63,11 @@ class FeesStatementsActivity : AppCompatActivity() {
                 Toast.makeText(this, "Failed to download fee statement", Toast.LENGTH_SHORT).show()
             }
         } else {
-            Toast.makeText(this, "Adapter is not initialized", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Data is not ready for download", Toast.LENGTH_SHORT).show()
         }
     }
 
+    // AsyncTask to fetch the fee entities from the API
     private inner class FetchFeeEntitiesTask : AsyncTask<Void, Void, List<FeeEntity>>() {
 
         override fun doInBackground(vararg params: Void?): List<FeeEntity> {
@@ -72,28 +75,33 @@ class FeesStatementsActivity : AppCompatActivity() {
             val client = OkHttpClient()
 
             try {
-                val url = "http://192.168.88.86:8007/api/v1/fee/api/v1/fee/get_transactions_for_student/1/"
+                val url = "http://172.16.9.74:8007/api/v1/fee/api/v1/fee/get_transactions_for_student/1/"
                 val request = Request.Builder().url(url).build()
-                val response = client.newCall(request).execute()
+                val response: Response = client.newCall(request).execute()
 
-                val jsonData = response.body?.string()
-                if (jsonData != null) {
-                    val jsonArray = JSONArray(jsonData)
-                    for (i in 0 until jsonArray.length()) {
-                        val jsonObject = jsonArray.getJSONObject(i)
-                        val feeEntity = FeeEntity(
-                            id = jsonObject.getInt("id"),
-                            student_id = jsonObject.getInt("student_id"),
-                            description = jsonObject.getString("description"),
-                            debit = jsonObject.getInt("debit"),
-                            credit = jsonObject.getInt("credit"),
-                            balance = jsonObject.getInt("balance"),
-                            transaction_date = jsonObject.getString("transaction_date"),
-                            firstName = jsonObject.getString("firstName"),
-                            middleName = jsonObject.getString("middleName")
-                        )
-                        feeEntities.add(feeEntity)
+                // Check if the response is successful
+                if (response.isSuccessful) {
+                    val jsonData = response.body?.string()
+                    if (jsonData != null) {
+                        val jsonArray = JSONArray(jsonData)
+                        for (i in 0 until jsonArray.length()) {
+                            val jsonObject = jsonArray.getJSONObject(i)
+                            val feeEntity = FeeEntity(
+                                id = jsonObject.getInt("id"),
+                                student_id = jsonObject.getInt("student_id"),
+                                description = jsonObject.getString("description"),
+                                debit = jsonObject.getInt("debit"),
+                                credit = jsonObject.getInt("credit"),
+                                balance = jsonObject.getInt("balance"),
+                                transaction_date = jsonObject.getString("transaction_date"),
+                                firstName = jsonObject.optString("firstName", "Unknown"),
+                                middleName = jsonObject.optString("middleName", "Unknown")
+                            )
+                            feeEntities.add(feeEntity)
+                        }
                     }
+                } else {
+                    Log.e("FeesStatementsActivity", "Unsuccessful response: ${response.message}")
                 }
             } catch (e: IOException) {
                 Log.e("FeesStatementsActivity", "Error: ${e.message}", e)
@@ -104,8 +112,12 @@ class FeesStatementsActivity : AppCompatActivity() {
 
         override fun onPostExecute(result: List<FeeEntity>) {
             super.onPostExecute(result)
-            adapter = FeeEntityAdapter(result)
-            recyclerViewTransactions.adapter = adapter
+            if (result.isNotEmpty()) {
+                adapter = FeeEntityAdapter(result)
+                recyclerViewTransactions.adapter = adapter
+            } else {
+                Toast.makeText(this@FeesStatementsActivity, "No transactions found", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }

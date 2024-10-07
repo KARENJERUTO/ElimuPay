@@ -38,7 +38,7 @@ class FeeEntityAdapter(private val feeEntities: List<FeeEntity>) :
         private val textTransactionDate: TextView = itemView.findViewById(R.id.textTransactionDate)
 
         fun bind(feeEntity: FeeEntity) {
-            textStudentName.text = "${feeEntity.firstName} ${feeEntity.middleName}"
+
             textStudentID.text = feeEntity.student_id.toString()
             textDescription.text = feeEntity.description
             textDebit.text = feeEntity.debit.toString()

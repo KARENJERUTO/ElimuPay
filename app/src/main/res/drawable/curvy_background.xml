@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#1F3A93" /> <!-- Blue Color -->
+
+    <corners android:radius="360dp" />
+
+    <!-- Use this path for the curvy effect -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M 0 0 Q 300 200 1080 100 L 1080 0 Z" />
+</shape>

@@ -48,7 +48,7 @@ class FeeStructureActivity : AppCompatActivity() {
     }
 
     private fun fetchFeeStructure() {
-        val url = "http://192.168.90.244:8000/api/v1/fee/api/v1/fee/fee structure/get_fee_structure/7/"
+        val url = "http://172.16.9.74:8001/api/v1/fee/api/v1/fee/fee structure/get_fee_structure/1/"
         val client = OkHttpClient()
 
         val request = Request.Builder()

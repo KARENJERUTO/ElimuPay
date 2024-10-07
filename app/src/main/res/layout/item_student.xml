@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Student Information"
-            android:textColor="#1F3A93"
+            android:textColor="#936C1F"
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_gravity="center_horizontal"
@@ -79,7 +79,7 @@
             android:text="Pay Fee"
             android:textColor="@android:color/white"
             android:textSize="18sp"
-            android:backgroundTint="#FFD700"
+            android:backgroundTint="#936C1F"
             app:cornerRadius="8dp"
             android:padding="16dp"
             android:layout_marginTop="16dp" />

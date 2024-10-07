@@ -31,6 +31,7 @@ class MpesaPayment : AppCompatActivity() {
             val phoneNumber = phoneNumberInput.text.toString().trim()
             if (phoneNumber.isNotEmpty()) {
                 showPaymentDialog(phoneNumber)
+                phoneNumberInput.setText("") // Clear input after initiating dialog
             } else {
                 Toast.makeText(this, "Please enter a phone number", Toast.LENGTH_SHORT).show()
             }
@@ -43,8 +44,8 @@ class MpesaPayment : AppCompatActivity() {
         val paymentTypes = arrayOf("Full Payment", "Partial Payment")
         builder.setItems(paymentTypes) { _, which ->
             when (which) {
-                0 -> processPayment(PaymentRequest(phoneNumber))
-                1 -> showPartialPaymentDialog(phoneNumber)
+                0 -> processPayment(PaymentRequest(phoneNumber)) // Full payment
+                1 -> showPartialPaymentDialog(phoneNumber)      // Partial payment
             }
         }
         builder.setNegativeButton("Cancel") { dialog, _ ->
@@ -75,17 +76,24 @@ class MpesaPayment : AppCompatActivity() {
         dialog.show()
     }
 
+    // Step 1: Initiate Payment Process
     private fun processPayment(request: PaymentRequest) {
         CoroutineScope(Dispatchers.Main).launch {
-            val response = makePaymentAsync(request)
-            handlePaymentResponse(response)
+            val response = initiateMpesaPayment(request)
+            if (response.success) {
+                Toast.makeText(this@MpesaPayment, "Payment request sent. Please confirm on your phone.", Toast.LENGTH_LONG).show()
+                pollPaymentStatus(request) // Start polling the backend to check payment status
+            } else {
+                Toast.makeText(this@MpesaPayment, response.message, Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
-    private suspend fun makePaymentAsync(request: PaymentRequest): PaymentResponse {
+    // Step 2: Call your backend to initiate payment
+    private suspend fun initiateMpesaPayment(request: PaymentRequest): PaymentResponse {
         return withContext(Dispatchers.IO) {
             try {
-                val url = URL("http://192.168.1.105:8003/api/v1/mpesa/lipa_na_mpesa/254704754722/1")
+                val url = URL("http://172.16.9.74:8007/api/v1/mpesa/lipa_na_mpesa/254704754722/1") // Update with your backend API
                 val connection = url.openConnection() as HttpURLConnection
                 connection.requestMethod = "POST"
                 connection.setRequestProperty("Content-Type", "application/json")
@@ -101,15 +109,12 @@ class MpesaPayment : AppCompatActivity() {
                     it.flush()
                 }
 
-                if (connection.responseCode == HttpURLConnection.HTTP_CREATED) { // 201 Created
+                if (connection.responseCode == HttpURLConnection.HTTP_CREATED) {
                     val response = connection.inputStream.bufferedReader().readText()
                     val jsonResponse = JSONObject(response)
-
-                    val phoneNumber = jsonResponse.getString("phone_number")
-
-                    PaymentResponse(true, phoneNumber, null)
+                    PaymentResponse(true, jsonResponse.getString("phone_number"), null)
                 } else {
-                    PaymentResponse(false, "", "Payment failed with status code: ${connection.responseCode}")
+                    PaymentResponse(false, "", "Payment request failed with status code: ${connection.responseCode}")
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -118,14 +123,50 @@ class MpesaPayment : AppCompatActivity() {
         }
     }
 
-    private fun handlePaymentResponse(response: PaymentResponse) {
-        if (response.success) {
-            val paymentDetails = "Payment successful for phone number: ${response.phoneNumber}"
-            Toast.makeText(this, paymentDetails, Toast.LENGTH_LONG).show()
-        } else {
-            Toast.makeText(this, response.message, Toast.LENGTH_SHORT).show()
+    // Step 3: Poll payment status (or handle via a backend push notification system)
+    private fun pollPaymentStatus(request: PaymentRequest) {
+        CoroutineScope(Dispatchers.Main).launch {
+            var isPaymentComplete = false
+            while (!isPaymentComplete) {
+                val paymentStatus = checkPaymentStatus(request)
+                if (paymentStatus.success) {
+                    Toast.makeText(this@MpesaPayment, "Payment Successful!", Toast.LENGTH_LONG).show()
+                    isPaymentComplete = true
+                } else if (paymentStatus.message != null) {
+                    Toast.makeText(this@MpesaPayment, paymentStatus.message, Toast.LENGTH_SHORT).show()
+                    isPaymentComplete = true // Stop polling after failure
+                }
+
+            }
         }
     }
+
+    // Check the payment status from your backend
+    private suspend fun checkPaymentStatus(request: PaymentRequest): PaymentResponse {
+        return withContext(Dispatchers.IO) {
+            try {
+                val url = URL("http://192.168.1.105:8003/api/v1/mpesa/payment_status/${request.phoneNumber}") // Update with your status check endpoint
+                val connection = url.openConnection() as HttpURLConnection
+                connection.requestMethod = "GET"
+
+                if (connection.responseCode == HttpURLConnection.HTTP_OK) {
+                    val response = connection.inputStream.bufferedReader().readText()
+                    val jsonResponse = JSONObject(response)
+                    PaymentResponse(
+                        success = jsonResponse.getBoolean("success"),
+                        phoneNumber = request.phoneNumber,
+                        message = if (jsonResponse.getBoolean("success")) null else "Payment failed"
+                    )
+                } else {
+                    PaymentResponse(false, request.phoneNumber, "Failed to retrieve payment status")
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                PaymentResponse(false, request.phoneNumber, "Error retrieving payment status: ${e.message}")
+            }
+        }
+    }
+
 }
 
 data class PaymentRequest(val phoneNumber: String, val amount: String? = null)
